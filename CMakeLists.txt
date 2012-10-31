@@ -28,6 +28,7 @@ set(CMAKE_OSX_DEPLOYMENT_TARGET 10.5)
 # Options
 option(AXR_ALL_WARNINGS "Display as many warnings as possible" OFF)
 option(AXR_BUILD_CORE "Builds the core library" ON)
+option(AXR_BUILD_EXTENSIONS "Builds extension libraries for toolkit integration" "QT")
 
 if(BUILD_UNIVERSAL_BINS)
     set(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
@@ -131,7 +132,6 @@ endif()
 
     configure_file("${CMAKE_SOURCE_DIR}/config.in.h" "${CMAKE_BINARY_DIR}/config.h")
 
-    set(AXR_BUILD_EXTENSIONS QT)
     add_subdirectory(src/core)
     add_subdirectory(src/browser)
 
