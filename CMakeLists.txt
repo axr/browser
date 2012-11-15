@@ -10,19 +10,6 @@ include(ForceLatinPaths)
 
 project(AXRBrowser)
 
-if("${CMAKE_BUILD_TYPE}" STREQUAL Release)
-    set(IS_RELEASE_BUILD TRUE)
-    set(IS_DEBUG_BUILD FALSE)
-else()
-    # Default to debug builds
-    if(NOT CMAKE_BUILD_TYPE)
-        set(CMAKE_BUILD_TYPE Debug)
-    endif()
-
-    set(IS_RELEASE_BUILD FALSE)
-    set(IS_DEBUG_BUILD TRUE)
-endif()
-
 set(CMAKE_OSX_DEPLOYMENT_TARGET 10.5)
 
 # Options
@@ -135,9 +122,5 @@ endif()
     add_subdirectory(src/core)
     add_subdirectory(src/browser)
 
-if(IS_RELEASE_BUILD)
     include(InstallRequiredSystemLibraries)
     include(CPack)
-else()
-    install(CODE "message(FATAL_ERROR \"You cannot install or package debug builds\")")
-endif()

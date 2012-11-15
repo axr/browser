@@ -54,14 +54,12 @@ set_target_properties(${TARGET_NAME_APP_BROWSER} PROPERTIES
     OUTPUT_NAME "${TARGET_NAME_APP_BROWSER_OUTPUT_NAME}"
 )
 
-if(IS_RELEASE_BUILD)
-    install(TARGETS ${TARGET_NAME_APP_BROWSER}
-        BUNDLE DESTINATION . COMPONENT browser
-        RUNTIME DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_REL} COMPONENT browser
-    )
+install(TARGETS ${TARGET_NAME_APP_BROWSER}
+    BUNDLE DESTINATION . COMPONENT browser
+    RUNTIME DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_REL} COMPONENT browser
+)
 
-    if(WIN32 OR APPLE)
-        install_qt4_executable("${TARGET_NAME_APP_BROWSER_OUTPUT_NAME}${CMAKE_USER_EXECUTABLE_SUFFIX}" "qtaccessiblewidgets qcncodecs qjpcodecs qkrcodecs qtwcodecs qsvgicon qgif qico qjpeg qmng qsvg qtiff" "" "${ALL_LIBRARY_DIRS}" "" "" browser)
-        empty_lproj(${TARGET_NAME_APP_BROWSER_OUTPUT_NAME})
-    endif()
+if(WIN32 OR APPLE)
+    install_qt4_executable("${TARGET_NAME_APP_BROWSER_OUTPUT_NAME}${CMAKE_USER_EXECUTABLE_SUFFIX}" "qtaccessiblewidgets qcncodecs qjpcodecs qkrcodecs qtwcodecs qsvgicon qgif qico qjpeg qmng qsvg qtiff" "" "${ALL_LIBRARY_DIRS}" "" "" browser)
+    empty_lproj(${TARGET_NAME_APP_BROWSER_OUTPUT_NAME})
 endif()
