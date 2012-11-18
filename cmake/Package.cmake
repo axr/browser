@@ -1,5 +1,5 @@
 set(BROWSER_PACKAGE_NAME "AXR Browser")
-set(BROWSER_PACKAGE_PREFIX "axrbrowser")
+set(BROWSER_PACKAGE_PREFIX "axr-browser")
 
 if(WIN32)
     set(AXR_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\src\\\\core\\\\share\\\\icons\\\\prototype.ico")
@@ -38,25 +38,14 @@ set(CPACK_RESOURCE_FILE_LICENSE "${AXR_LICENSE_FILE_TXT}")
 # Friendly names, descriptions and groups for components
 set(CPACK_COMPONENT_BROWSER_DISPLAY_NAME "AXR Browser")
 set(CPACK_COMPONENT_BROWSER_DESCRIPTION "An browser-like application that can be used to test the AXR rendering engine and HSS language")
-set(CPACK_COMPONENT_BROWSER_GROUP "Runtime")
 set(CPACK_COMPONENT_BROWSER_REQUIRED TRUE)
 
-set(CPACK_COMPONENT_LIBRARIES_GROUP "Runtime")
 set(CPACK_COMPONENT_LIBRARIES_REQUIRED TRUE)
 set(CPACK_COMPONENT_LIBRARIES_HIDDEN TRUE)
 
-set(CPACK_COMPONENT_FRAMEWORKS_GROUP "Runtime")
-set(CPACK_COMPONENT_FRAMEWORKS_REQUIRED TRUE)
-set(CPACK_COMPONENT_FRAMEWORKS_HIDDEN TRUE)
-
-# Platform name
-string(TOLOWER "${CMAKE_SYSTEM_NAME}" OS_CODE)
-if(APPLE)
-    set(OS_CODE "osx")
-endif()
-
 # Filenames
-set(CPACK_PACKAGE_FILE_NAME "${BROWSER_PACKAGE_PREFIX}-${BROWSER_VERSION_STRING}-${OS_CODE}-${CMAKE_TARGET_ARCHITECTURE_CODE}")
+include(PackageFilenames)
+set(CPACK_PACKAGE_FILE_NAME "${BROWSER_PACKAGE_PREFIX}-${BROWSER_VERSION_STRING}-${OS_CODE}-${ARCH_CODE}")
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${BROWSER_PACKAGE_PREFIX}-${BROWSER_VERSION_STRING}-src")
 set(CPACK_SOURCE_IGNORE_FILES ".git" ".DS_Store" "thumbs.db" "CMakeLists.txt.user")
 
@@ -64,7 +53,7 @@ set(CPACK_SOURCE_IGNORE_FILES ".git" ".DS_Store" "thumbs.db" "CMakeLists.txt.use
 list(APPEND CPACK_SOURCE_GENERATOR ZIP TGZ STGZ TZ TBZ2)
 
 # for NSIS to create Start Menu shortcuts
-set(CPACK_PACKAGE_EXECUTABLES "Browser;Browser")
+set(CPACK_PACKAGE_EXECUTABLES "axrbrowser" "AXR Browser")
 
 if(WIN32)
     set(CPACK_GENERATOR "NSIS")
