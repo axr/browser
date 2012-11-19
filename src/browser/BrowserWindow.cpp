@@ -336,6 +336,7 @@ void BrowserWindow::showPreferences()
 
 void BrowserWindow::showAbout()
 {
+    qApp->showAboutDialog();
 }
 
 void BrowserWindow::toggleAntialiasing(bool on)

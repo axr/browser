@@ -61,6 +61,7 @@ public:
     QIODevice* loggingDevice() const;
     void showPreferencesDialog();
     void showLogWindow();
+    void showAboutDialog();
 
 protected:
     bool event(QEvent *e);

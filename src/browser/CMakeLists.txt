@@ -6,6 +6,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 
 set(browser_SOURCES
     Info.plist
+    AboutDialog.cpp
+    AboutDialog.h
+    AboutDialog.ui
     LogWindow.cpp
     LogWindow.h
     LogWindow.ui

@@ -49,6 +49,7 @@
 #include "AXRWarning.h"
 #include "LogWindow.h"
 #include "PreferencesDialog.h"
+#include "AboutDialog.h"
 #include "BrowserApplication.h"
 #include "BrowserSettings.h"
 #include "BrowserWindow.h"
@@ -60,6 +61,7 @@ public:
     PreferencesDialog *preferencesDialog;
     LogWindow *logWindow;
     BrowserWindow *mainWindow;
+    AboutDialog *aboutDialog;
 };
 
 BrowserApplication::BrowserApplication(int &argc, char **argv)
@@ -74,6 +76,7 @@ BrowserApplication::BrowserApplication(int &argc, char **argv)
 
     d->settings = new BrowserSettings();
     d->preferencesDialog = new PreferencesDialog();
+    d->aboutDialog = new AboutDialog();
     d->logWindow = new LogWindow();
     d->mainWindow = new BrowserWindow();
     d->mainWindow->show();
@@ -107,6 +110,7 @@ BrowserApplication::BrowserApplication(int &argc, char **argv)
 BrowserApplication::~BrowserApplication()
 {
     delete d->mainWindow;
+    delete d->aboutDialog;
     delete d->logWindow;
     delete d->preferencesDialog;
     delete d->settings;
@@ -172,4 +176,9 @@ void BrowserApplication::showPreferencesDialog()
 void BrowserApplication::showLogWindow()
 {
     d->logWindow->show();
+}
+
+void BrowserApplication::showAboutDialog()
+{
+    d->aboutDialog->show();
 }
