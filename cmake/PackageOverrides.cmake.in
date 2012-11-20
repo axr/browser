@@ -2,6 +2,9 @@ if(CPACK_GENERATOR STREQUAL "DragNDrop" OR CPACK_GENERATOR STREQUAL "DEB" OR CPA
     # We ONLY want the browser executable/bundle since bundles package all their dependencies,
     # deb/rpm list other packages to provide their dependencies
     set(CPACK_COMPONENTS_ALL browser)
+
+    # DEB generator seems to need this for CPACK_COMPONENTS_ALL to work
+    set(CPACK_DEB_COMPONENT_INSTALL ON)
 else()
     # Other generators such as NSIS or WIX must bundle everything,
     # but we don't want header files for the core library

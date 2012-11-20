@@ -123,5 +123,17 @@ endif()
     add_subdirectory(src/core)
     add_subdirectory(src/browser)
 
+if(DPKG_FOUND)
+    add_custom_target(distribution
+        COMMAND cmake --build . --target package && export debfile="${CPACK_PACKAGE_FILE_NAME}" && ${CMAKE_SOURCE_DIR}/cmake/fixdeb.sh
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+else()
+    add_custom_target(distribution
+        COMMAND cmake --build . --target package
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    )
+endif()
+
     include(InstallRequiredSystemLibraries)
     include(CPack)
