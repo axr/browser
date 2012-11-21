@@ -96,11 +96,6 @@ if(DPKG_FOUND)
     set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
     set(CPACK_DEBIAN_PACKAGE_SECTION "web")
     set(CPACK_DEBIAN_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}")
-
-    # Because we have to mess with component packaging in a weird way,
-    # we need to name the Debian package *just* "axr", and -browser
-    # will be appended by the component package file
-    set(CPACK_PACKAGE_NAME "axr")
 endif()
 
 if(RPMBUILD_FOUND)
@@ -122,12 +117,16 @@ if(RPMBUILD_FOUND)
 endif()
 
 if(DPKG_FOUND OR RPMBUILD_FOUND)
+    # In tandem with CPACK_DEB/RPM_COMPONENT_INSTALL in PackageOverrides.cmake.in
+    # Otherwise the package gets named incorrectly since CPack appends the component name
+    set(CPACK_PACKAGE_NAME "axr")
+
+    # Temporary directories for intermediary files
     file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/deb")
     file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/rpm")
 
+    # Generate Debian and RPM changelogs from our markdown formatted changelog
     find_package(PythonInterp REQUIRED)
-
-    # Just generate both at once to avoid duplicated code
     execute_process(COMMAND ${PYTHON_EXECUTABLE} common/changelog.py --deb "${CMAKE_BINARY_DIR}/deb/changelog" --rpm "${CMAKE_BINARY_DIR}/rpm/changelog" "${BROWSER_PACKAGE_PREFIX}" CHANGELOG.md WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 endif()
 

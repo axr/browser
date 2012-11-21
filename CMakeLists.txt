@@ -123,9 +123,10 @@ endif()
     add_subdirectory(src/core)
     add_subdirectory(src/browser)
 
-if(DPKG_FOUND)
+if(UNIX)
+    # Perform post-processing on CPack-generated packages
     add_custom_target(distribution
-        COMMAND cmake --build . --target package && export debfile="${CPACK_PACKAGE_FILE_NAME}" && ${CMAKE_SOURCE_DIR}/cmake/fixdeb.sh
+        COMMAND cmake --build . --target package && export pkgfilename="${CPACK_PACKAGE_FILE_NAME}" && ${CMAKE_SOURCE_DIR}/cmake/postpackage.sh
         WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
     )
 else()

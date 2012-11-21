@@ -3,8 +3,11 @@ if(CPACK_GENERATOR STREQUAL "DragNDrop" OR CPACK_GENERATOR STREQUAL "DEB" OR CPA
     # deb/rpm list other packages to provide their dependencies
     set(CPACK_COMPONENTS_ALL browser)
 
-    # DEB generator seems to need this for CPACK_COMPONENTS_ALL to work
+    # These generators don't respect CPACK_COMPONENTS_ALL
+    # Strange, since DragNDrop does when NOT set to component mode (default)
+    # And yes, DEB not DEBIAN like every other variable for the DEBIAN generator
     set(CPACK_DEB_COMPONENT_INSTALL ON)
+    set(CPACK_RPM_COMPONENT_INSTALL ON)
 else()
     # Other generators such as NSIS or WIX must bundle everything,
     # but we don't want header files for the core library
