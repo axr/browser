@@ -105,7 +105,7 @@ endif()
 
 if(RPMBUILD_FOUND)
     set(CPACK_GENERATOR "RPM")
-    set(CPACK_RPM_CHANGELOG_FILE "${CMAKE_SOURCE_DIR}/CHANGELOG.md")
+    set(CPACK_RPM_CHANGELOG_FILE "${CMAKE_BINARY_DIR}/rpm/changelog")
     set(CPACK_RPM_PACKAGE_ARCHITECTURE "${ARCH_CODE}")
     set(CPACK_RPM_PACKAGE_DEPENDS "libaxr")
     set(CPACK_RPM_PACKAGE_DESCRIPTION "${CPACK_PACKAGE_DESCRIPTION}")
@@ -121,6 +121,16 @@ if(RPMBUILD_FOUND)
     set(CPACK_RPM_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}")
 endif()
 
+if(DPKG_FOUND OR RPMBUILD_FOUND)
+    file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/deb")
+    file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/rpm")
+
+    find_package(PythonInterp REQUIRED)
+
+    # Just generate both at once to avoid duplicated code
+    execute_process(COMMAND ${PYTHON_EXECUTABLE} common/changelog.py --deb "${CMAKE_BINARY_DIR}/deb/changelog" --rpm "${CMAKE_BINARY_DIR}/rpm/changelog" "${BROWSER_PACKAGE_PREFIX}" CHANGELOG.md WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
+endif()
+
 if(DPKG_FOUND)
     # Configure and install Debian copyright file
     execute_process(COMMAND date -R OUTPUT_VARIABLE DATE_R OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -128,9 +138,7 @@ if(DPKG_FOUND)
     install(FILES "${CMAKE_BINARY_DIR}/copyright" DESTINATION share/doc/${BROWSER_PACKAGE_PREFIX} RENAME copyright COMPONENT browser)
 
     # Configure and install changelog file
-    file(COPY "${CMAKE_SOURCE_DIR}/CHANGELOG.md" DESTINATION "${CMAKE_BINARY_DIR}")
-    file(RENAME "${CMAKE_BINARY_DIR}/CHANGELOG.md" "${CMAKE_BINARY_DIR}/changelog")
-    file(REMOVE "${CMAKE_BINARY_DIR}/changelog.gz")
-    execute_process(COMMAND gzip -9 changelog WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-    install(FILES "${CMAKE_BINARY_DIR}/changelog.gz" DESTINATION share/doc/${BROWSER_PACKAGE_PREFIX} COMPONENT browser)
+    file(REMOVE "${CMAKE_BINARY_DIR}/deb/changelog.gz")
+    execute_process(COMMAND gzip -9 changelog WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/deb")
+    install(FILES "${CMAKE_BINARY_DIR}/deb/changelog.gz" DESTINATION share/doc/${BROWSER_PACKAGE_PREFIX} COMPONENT browser)
 endif()
