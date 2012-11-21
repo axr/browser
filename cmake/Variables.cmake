@@ -10,6 +10,10 @@ elseif(BROWSER_VERSION_PATCH GREATER 0)
     set(BROWSER_VERSION_STRING "${BROWSER_VERSION_STRING}.${BROWSER_VERSION_PATCH}")
 endif()
 
+# Numeric-only version string; i.e. 1.0.7.3
+set(BROWSER_VERSION_STRING_REAL ${BROWSER_VERSION_STRING})
+
+# Human-readable version string; i.e. 1.0.8-beta1
 git_append_shorttag(BROWSER_VERSION_STRING)
 
 set(AXR_README_FILE "${CMAKE_SOURCE_DIR}/README.md")
