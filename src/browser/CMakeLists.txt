@@ -64,5 +64,5 @@ install(TARGETS ${TARGET_NAME_APP_BROWSER}
 
 if(WIN32 OR APPLE)
     install_qt4_executable("${TARGET_NAME_APP_BROWSER_OUTPUT_NAME}${CMAKE_USER_EXECUTABLE_SUFFIX}" "qtaccessiblewidgets;qcncodecs;qjpcodecs;qkrcodecs;qtwcodecs;qsvgicon;qgif;qico;qjpeg;qmng;qsvg;qtiff" "" "${ALL_LIBRARY_DIRS}" "" "" browser)
-    empty_lproj(${TARGET_NAME_APP_BROWSER_OUTPUT_NAME})
+    empty_lproj(${TARGET_NAME_APP_BROWSER_OUTPUT_NAME} browser)
 endif()
