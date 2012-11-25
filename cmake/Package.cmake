@@ -83,7 +83,7 @@ BrandingText '${AXR_VENDOR}'")
     set(CPACK_WIX_UPGRADE_GUID "152C98EF-20E0-429C-B8F0-426876A9C3CF") # Permanent, never change this
 
     set(CPACK_PACKAGE_EXECUTABLES "axrbrowser" "AXR Browser") # Start Menu
-#   set(CPACK_PACKAGE_ICON "<something>.bmp")
+    set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/common\\\\nsis-header.bmp")
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "${BROWSER_PACKAGE_NAME}")
 endif()
 
