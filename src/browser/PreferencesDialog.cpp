@@ -75,7 +75,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
     loadPreferences();
     switchPage();
 
-#ifdef Q_WS_MACX
+#ifdef Q_OS_MAC
     this->setWindowModality(Qt::NonModal);
     this->ui->buttonBox->hide();
 
@@ -135,7 +135,7 @@ void PreferencesDialog::accept()
     qApp->settings()->setDebuggingChannelsMask(mask);
     axr_debug_activate_channel(mask);
 
-#ifndef Q_WS_MACX
+#ifndef Q_OS_MAC
     close();
 #endif
 }
@@ -147,7 +147,7 @@ void PreferencesDialog::reject()
 
 void PreferencesDialog::preferenceChanged()
 {
-#ifdef Q_WS_MACX
+#ifdef Q_OS_MAC
     accept();
 #endif
 }
