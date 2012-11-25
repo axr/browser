@@ -150,7 +150,7 @@ bool BrowserApplication::notify(QObject *receiver, QEvent *event)
         QMessageBox::critical(d->mainWindow, "Fatal error",
                               "The application has encountered a critical error and will terminate.\n\n"
                               "This is the developers' fault.\n\n"
-                              "Complain here https://github.com/AXR/Prototype/issues/168 until they fix it!\n\n"
+                              "Complain here https://github.com/axr/core/issues/168 until they fix it!\n\n"
                               + e.toString());
         QApplication::exit(-1);
     }
