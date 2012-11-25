@@ -94,6 +94,7 @@ PreferencesDialog::~PreferencesDialog()
 void PreferencesDialog::loadPreferences()
 {
     ui->fileLaunchActionComboBox->setCurrentIndex(qApp->settings()->fileLaunchAction());
+    ui->autoReloadCheckBox->setChecked(qApp->settings()->autoReload());
 
     quint32 mask = qApp->settings()->debuggingChannelsMask();
     ui->onChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_ON);
@@ -119,6 +120,7 @@ void PreferencesDialog::accept()
         return;
 
     qApp->settings()->setFileLaunchAction(static_cast<BrowserSettings::FileLaunchAction>(ui->fileLaunchActionComboBox->currentIndex()));
+    qApp->settings()->setAutoReload(ui->autoReloadCheckBox->isChecked());
 
     quint32 mask = 0;
     mask |= ui->onChannelCheckBox->isChecked() ? AXR_DEBUG_CH_ON : 0;

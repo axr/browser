@@ -29,6 +29,9 @@
         <height>150</height>
        </size>
       </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
       <widget class="QWidget" name="generalPage">
        <layout class="QFormLayout" name="formLayout">
         <property name="fieldGrowthPolicy">
@@ -58,6 +61,23 @@
             <string>Show open file dialog</string>
            </property>
           </item>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="fileHandlingLabel">
+          <property name="text">
+           <string>File Handling</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="autoReloadCheckBox">
+          <property name="toolTip">
+           <string>When checked, any file currently loaded will be automatically refreshed if it is changed by an external application. This allows you to see your changes immediately simply by pressing save in your text editor.</string>
+          </property>
+          <property name="text">
+           <string>Automatically reload changed files</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -243,6 +263,7 @@
  </widget>
  <tabstops>
   <tabstop>fileLaunchActionComboBox</tabstop>
+  <tabstop>autoReloadCheckBox</tabstop>
   <tabstop>onChannelCheckBox</tabstop>
   <tabstop>overviewChannelCheckBox</tabstop>
   <tabstop>generalChannelCheckBox</tabstop>
@@ -347,8 +368,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>362</x>
-     <y>122</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>311</x>
@@ -363,8 +384,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>376</x>
-     <y>144</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>480</x>
@@ -379,8 +400,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>425</x>
-     <y>169</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>535</x>
@@ -395,8 +416,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>334</x>
-     <y>194</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>206</x>
@@ -411,8 +432,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>351</x>
-     <y>216</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>156</x>
@@ -427,8 +448,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>398</x>
-     <y>238</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>729</x>
@@ -443,8 +464,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>369</x>
-     <y>261</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>717</x>
@@ -459,8 +480,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>435</x>
-     <y>288</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>689</x>
@@ -475,8 +496,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>394</x>
-     <y>308</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>680</x>
@@ -491,8 +512,8 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>368</x>
-     <y>327</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>662</x>
@@ -507,12 +528,28 @@
    <slot>preferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>343</x>
-     <y>104</y>
+     <x>111</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>676</x>
      <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>autoReloadCheckBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>preferenceChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>381</x>
+     <y>121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>311</x>
+     <y>199</y>
     </hint>
    </hints>
   </connection>

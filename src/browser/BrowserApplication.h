@@ -63,9 +63,15 @@ public:
     void showLogWindow();
     void showAboutDialog();
 
+    void watchPath(const QString &path);
+    void unwatchPath(const QString &path);
+
 protected:
     bool event(QEvent *e);
     bool notify(QObject *receiver, QEvent *event);
+
+private slots:
+    void fileChanged(const QString &path);
 
 private:
     class Private;

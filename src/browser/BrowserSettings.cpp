@@ -47,6 +47,7 @@
 
 #define key_fileLaunchAction "general/fileLaunchAction"
 #define key_lastFileOpened "general/lastFileOpened"
+#define key_autoReload "general/autoReload"
 #define key_debuggingChannelsMask "debug/channelsMask"
 
 class BrowserSettings::Private
@@ -90,6 +91,16 @@ QString BrowserSettings::lastFileOpened() const
 void BrowserSettings::setLastFileOpened(const QString &filePath)
 {
     d->settings->setValue(key_lastFileOpened, filePath);
+}
+
+bool BrowserSettings::autoReload() const
+{
+    return d->settings->value(key_autoReload, true).toBool();
+}
+
+void BrowserSettings::setAutoReload(bool autoReload)
+{
+    d->settings->setValue(key_autoReload, autoReload);
 }
 
 quint32 BrowserSettings::debuggingChannelsMask() const

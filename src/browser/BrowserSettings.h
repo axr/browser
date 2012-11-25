@@ -70,6 +70,9 @@ public:
     QString lastFileOpened() const;
     void setLastFileOpened(const QString &filePath);
 
+    bool autoReload() const;
+    void setAutoReload(bool autoReload);
+
     quint32 debuggingChannelsMask() const;
     void setDebuggingChannelsMask(quint32 mask);
 

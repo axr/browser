@@ -185,6 +185,7 @@ void BrowserWindow::openFile(const QString &filePath)
     setWindowFilePath(filePath);
 
     d->document->loadFileByPath(QUrl::fromLocalFile(filePath));
+    qApp->watchPath(filePath);
     qApp->settings()->setLastFileOpened(filePath);
     update();
 }
@@ -206,6 +207,11 @@ void BrowserWindow::reloadFile()
 
 void BrowserWindow::closeFile()
 {
+    if (!windowFilePath().isEmpty())
+        // TODO: when we have multiple windows, we should only stop
+        // watching the path if no other windows have this file open
+        qApp->unwatchPath(windowFilePath());
+
     setWindowTitle(QCoreApplication::applicationName());
     setWindowFilePath(QString());
 

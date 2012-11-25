@@ -41,7 +41,9 @@
  *
  ********************************************************************/
 
+#include <QFileInfo>
 #include <QFileOpenEvent>
+#include <QFileSystemWatcher>
 #include <QMessageBox>
 #include <QUrl>
 #include "config.h"
@@ -62,6 +64,7 @@ public:
     LogWindow *logWindow;
     BrowserWindow *mainWindow;
     AboutDialog *aboutDialog;
+    QFileSystemWatcher watcher;
 };
 
 BrowserApplication::BrowserApplication(int &argc, char **argv)
@@ -73,6 +76,8 @@ BrowserApplication::BrowserApplication(int &argc, char **argv)
     setOrganizationDomain(AXR_DOMAIN);
     setApplicationVersion(AXR_VERSION_STRING);
     setApplicationName("AXR Browser");
+
+    connect(&d->watcher, SIGNAL(fileChanged(QString)), this, SLOT(fileChanged(QString)));
 
     d->settings = new BrowserSettings();
     d->preferencesDialog = new PreferencesDialog();
@@ -114,6 +119,9 @@ BrowserApplication::~BrowserApplication()
     delete d->logWindow;
     delete d->preferencesDialog;
     delete d->settings;
+
+    disconnect(&d->watcher, SIGNAL(fileChanged(QString)), this, SLOT(fileChanged(QString)));
+
     delete d;
 }
 
@@ -181,4 +189,25 @@ void BrowserApplication::showLogWindow()
 void BrowserApplication::showAboutDialog()
 {
     d->aboutDialog->show();
+}
+
+void BrowserApplication::watchPath(const QString &path)
+{
+    d->watcher.addPath(QFileInfo(path).canonicalFilePath());
+}
+
+void BrowserApplication::unwatchPath(const QString &path)
+{
+    d->watcher.removePath(QFileInfo(path).canonicalFilePath());
+}
+
+void BrowserApplication::fileChanged(const QString &path)
+{
+    if (!settings()->autoReload())
+        return;
+
+    if (QFileInfo(d->mainWindow->windowFilePath()).canonicalFilePath() == QFileInfo(path).canonicalFilePath())
+    {
+        d->mainWindow->reloadFile();
+    }
 }
