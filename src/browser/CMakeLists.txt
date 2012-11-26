@@ -67,4 +67,5 @@ if(WIN32 OR APPLE)
     empty_lproj(${TARGET_NAME_APP_BROWSER_OUTPUT_NAME} browser)
 endif()
 
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/axrbrowser.desktop" DESTINATION /usr/share/applications COMPONENT freedesktop)
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/axrbrowser.desktop" "${CMAKE_BINARY_DIR}/axrbrowser.desktop")
+install(FILES "${CMAKE_BINARY_DIR}/axrbrowser.desktop" DESTINATION /usr/share/applications COMPONENT freedesktop)

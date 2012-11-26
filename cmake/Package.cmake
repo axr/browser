@@ -128,6 +128,10 @@ if(DPKG_FOUND OR RPMBUILD_FOUND)
     # In tandem with CPACK_DEB/RPM_COMPONENT_INSTALL in PackageOverrides.cmake.in
     # Otherwise the package gets named incorrectly since CPack appends the component name
     set(CPACK_PACKAGE_NAME "axr")
+
+    # To ensure only one package gets built on DEB/RPM
+    set(CPACK_COMPONENT_BROWSER_GROUP browser)
+    set(CPACK_COMPONENT_FREEDESKTOP_GROUP browser)
 endif()
 
 set(PACKAGE_LINUX_COMPONENT browser)
