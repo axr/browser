@@ -18,9 +18,8 @@ Comment[es]=Navegador del proyecto AXR para ver archivos HSS
 Comment[et]=AXR projekti brauser HSS failide kuvamiseks
 Comment[fr]=Navigateur développé pour le projet AXR permettant l'affichage de fichiers HSS
 Comment[nl]=AXR Project browser voor het bekijken van HSS bestanden
-Exec=@CMAKE_INSTALL_PREFIX@/axrbrowser
+Exec=@CMAKE_INSTALL_PREFIX@/@CMAKE_RUNTIME_OUTPUT_DIRECTORY_REL@/axrbrowser
 Icon=axrbrowser
 Terminal=false
 Categories=Network;
 MimeType=application/x-hss;text/plain;
-
