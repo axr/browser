@@ -125,4 +125,5 @@ if(DPKG_FOUND OR RPMBUILD_FOUND)
     set(CPACK_PACKAGE_NAME "axr")
 endif()
 
+set(PACKAGE_LINUX_COMPONENT browser)
 include(PackageLinux)
