@@ -3,11 +3,16 @@ if(CPACK_GENERATOR STREQUAL "DragNDrop" OR CPACK_GENERATOR STREQUAL "DEB" OR CPA
     # deb/rpm list other packages to provide their dependencies
     set(CPACK_COMPONENTS_ALL browser)
 
-    # These generators don't respect CPACK_COMPONENTS_ALL
-    # Strange, since DragNDrop does when NOT set to component mode (default)
-    # And yes, DEB not DEBIAN like every other variable for the DEBIAN generator
-    set(CPACK_DEB_COMPONENT_INSTALL ON)
-    set(CPACK_RPM_COMPONENT_INSTALL ON)
+    # Debian and RPM packages will have things like .desktop files and icons...
+    if(CPACK_GENERATOR STREQUAL "DEB" OR CPACK_GENERATOR STREQUAL "RPM")
+        set(CPACK_COMPONENTS_ALL browser freedesktop)
+
+        # These generators don't respect CPACK_COMPONENTS_ALL
+        # Strange, since DragNDrop does when NOT set to component mode (default)
+        # And yes, DEB not DEBIAN like every other variable for the DEBIAN generator
+        set(CPACK_DEB_COMPONENT_INSTALL ON)
+        set(CPACK_RPM_COMPONENT_INSTALL ON)
+    endif()
 else()
     # Other generators such as NSIS or WIX must bundle everything,
     # but we don't want header files for the core library
