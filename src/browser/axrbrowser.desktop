@@ -1,0 +1,26 @@
+[Desktop Entry]
+Type=Application
+Name=AXR Browser
+Name[de]=AXR Browser
+Name[es]=Navegador AXR
+Name[et]=AXR Brauser
+Name[fr]=Navigateur AXR
+Name[nl]=AXR Browser
+GenericName=Browser
+GenericName[de]=Browser
+GenericName[es]=Navegador
+GenericName[et]=Brauser
+GenericName[fr]=Navigateur
+GenericName[nl]=Browser
+Comment=AXR Project browser for viewing HSS files
+Comment[de]=Browser des AXR Projekts um HSS Dateien zu darstellen
+Comment[es]=Navegador del proyecto AXR para ver archivos HSS
+Comment[et]=AXR projekti brauser HSS failide kuvamiseks
+Comment[fr]=Navigateur développé pour le projet AXR permettant l'affichage de fichiers HSS
+Comment[nl]=AXR Project browser voor het bekijken van HSS bestanden
+Exec=@CMAKE_INSTALL_PREFIX@/axrbrowser
+Icon=axrbrowser
+Terminal=false
+Categories=Network;
+MimeType=application/x-hss;text/plain;
+
