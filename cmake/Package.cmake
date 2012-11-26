@@ -132,6 +132,8 @@ if(DPKG_FOUND OR RPMBUILD_FOUND)
     # To ensure only one package gets built on DEB/RPM
     set(CPACK_COMPONENT_BROWSER_GROUP browser)
     set(CPACK_COMPONENT_FREEDESKTOP_GROUP browser)
+
+    set(CMAKE_INSTALL_PREFIX /usr)
 endif()
 
 set(PACKAGE_LINUX_COMPONENT browser)
