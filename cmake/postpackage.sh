@@ -4,10 +4,18 @@ set -e
 cd dist
 
 shopt -s nullglob
-for tgz in axr-browser-*.tar.gz
+for tgz in axr-browser-*-OPERATING_SYSTEM-*.tar.gz
 do
     os=$(uname | awk '{print tolower($0)}')
-    mv "$tgz" "${tgz/OPERATING_SYSTEM/$os}"
+    tgz2=${tgz/OPERATING_SYSTEM/$os}
+    mv "$tgz" "$tgz2"
+
+    # We don't want "OPERATING_SYSTEM" showing up...
+    tar xzf "$tgz2"
+    mv "${tgz%.tar.gz}" "${tgz2%.tar.gz}"
+    rm "$tgz2"
+    tar czf "$tgz2" "${tgz2%.tar.gz}"
+    rm -r "${tgz2%.tar.gz}"
 done
 
 if [ -f $pkgfilename-browser.deb ] ; then
