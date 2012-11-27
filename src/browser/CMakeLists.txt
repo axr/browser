@@ -68,4 +68,7 @@ if(WIN32 OR APPLE)
 endif()
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/axrbrowser.desktop" "${CMAKE_BINARY_DIR}/axrbrowser.desktop")
-install(FILES "${CMAKE_BINARY_DIR}/axrbrowser.desktop" DESTINATION /usr/share/applications COMPONENT freedesktop)
+
+# This is supposed to go in /usr/share/applications but we hardcode a /usr prefix for deb/rpm so it's OK
+# It will otherwise break packaging for the ARCHIVE generator
+install(FILES "${CMAKE_BINARY_DIR}/axrbrowser.desktop" DESTINATION share/applications COMPONENT freedesktop)
