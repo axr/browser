@@ -13,8 +13,9 @@ endif()
 # Numeric-only version string; i.e. 1.0.7.3
 set(BROWSER_VERSION_STRING_REAL ${BROWSER_VERSION_STRING})
 
+# TODO: Re-enable git tags when this mess is sorted out
 # Human-readable version string; i.e. 1.0.8-beta1
-git_append_shorttag(BROWSER_VERSION_STRING)
+# git_append_shorttag(BROWSER_VERSION_STRING)
 
 set(AXR_README_FILE "${CMAKE_SOURCE_DIR}/README.md")
 set(AXR_LICENSE_FILE "${CMAKE_SOURCE_DIR}/LICENSE")
