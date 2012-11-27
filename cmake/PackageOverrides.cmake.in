@@ -13,6 +13,8 @@ if(CPACK_GENERATOR STREQUAL "DragNDrop" OR CPACK_GENERATOR STREQUAL "DEB" OR CPA
         set(CPACK_DEB_COMPONENT_INSTALL ON)
         set(CPACK_RPM_COMPONENT_INSTALL ON)
     endif()
+elseif(CPACK_GENERATOR STREQUAL "TGZ")
+    set(CPACK_PACKAGE_FILE_NAME "axr-browser-${BROWSER_VERSION_STRING}-OPERATING_SYSTEM-${CMAKE_TARGET_ARCHITECTURE_CODE}")
 else()
     # Other generators such as NSIS or WIX must bundle everything,
     # but we don't want header files for the core library

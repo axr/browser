@@ -3,6 +3,13 @@ set -e
 
 cd dist
 
+shopt -s nullglob
+for tgz in axr-browser-*.tar.gz
+do
+    os=$(uname | awk '{print tolower($0)}')
+    mv "$tgz" "${tgz/OPERATING_SYSTEM/$os}"
+done
+
 if [ -f $pkgfilename-browser.deb ] ; then
     # Fix package name
     mv $pkgfilename-browser.deb $pkgfilename.deb
