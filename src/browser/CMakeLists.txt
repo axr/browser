@@ -2,7 +2,7 @@ if(BUILD_SHARED_LIBS)
     add_definitions(-DAXR_IMPORTS)
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ../3rdparty/qtmacextras/src ${CMAKE_BINARY_DIR})
 
 set(browser_SOURCES
     Info.plist
@@ -26,17 +26,36 @@ set(browser_SOURCES
     Resources.qrc
     resources.rc
 
+    ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.h
+
     # These need to be included so they can be copied to the bundle
     ${axr_icon_SOURCES}
     ${hss_SOURCES}
 )
+
+if(APPLE)
+    list(APPEND browser_SOURCES
+        ../3rdparty/qtmacextras/src/qtmactoolbardelegate.mm
+        ../3rdparty/qtmacextras/src/qtmactoolbardelegate.h
+        ../3rdparty/qtmacextras/src/qtmactoolbutton.mm
+        ../3rdparty/qtmacextras/src/qtmactoolbutton.h
+        ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.mm
+        ../3rdparty/qtmacextras/src/qtnstoolbar.mm
+        ../3rdparty/qtmacextras/src/qtnstoolbar.h
+    )
+    
+    find_library(COCOA_LIBRARY Cocoa REQUIRED)
+    mark_as_advanced(COCOA_LIBRARY)
+else()
+    list(APPEND browser_SOURCES ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.cpp)
+endif()
 
 source_group("Resources\\HSS Framework" FILES ${hss_SOURCES})
 
 qt_transform_sources(browser_SOURCES "${browser_SOURCES}")
 
 add_executable(${TARGET_NAME_APP_BROWSER} WIN32 MACOSX_BUNDLE ${browser_SOURCES})
-target_link_libraries(${TARGET_NAME_APP_BROWSER} ${TARGET_NAME_LIB_CORE} "${TARGET_NAME_LIB_QT}" ${QT_QTMAIN_LIBRARY})
+target_link_libraries(${TARGET_NAME_APP_BROWSER} ${TARGET_NAME_LIB_CORE} "${TARGET_NAME_LIB_QT}" ${QT_QTMAIN_LIBRARY} ${COCOA_LIBRARY})
 
 # TODO: Temporary until TEST target is removed
 target_link_libraries(${TARGET_NAME_APP_BROWSER} TEST)

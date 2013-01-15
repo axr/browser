@@ -51,6 +51,7 @@
 #include "BrowserApplication.h"
 #include "BrowserSettings.h"
 #include "ui_PreferencesDialog.h"
+#include "qtmacunifiedtoolbar.h"
 
 class PreferencesDialog::Private
 {
@@ -78,6 +79,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 #ifdef Q_OS_MAC
     this->setWindowModality(Qt::NonModal);
     this->ui->buttonBox->hide();
+
+    ::setUnifiedTitleAndToolBarOnMac(ui->toolBar);
 
     // OS X seems to prefer settings dialogs to be placed at (<center>, 150)
     this->adjustSize();
