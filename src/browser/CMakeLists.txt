@@ -42,7 +42,7 @@ if(APPLE)
         ../3rdparty/qtmacextras/src/qtnstoolbar.mm
         ../3rdparty/qtmacextras/src/qtnstoolbar.h
     )
-    
+
     find_library(COCOA_LIBRARY Cocoa REQUIRED)
     mark_as_advanced(COCOA_LIBRARY)
 else()
