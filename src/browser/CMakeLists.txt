@@ -26,8 +26,6 @@ set(browser_SOURCES
     Resources.qrc
     resources.rc
 
-    ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.h
-
     # These need to be included so they can be copied to the bundle
     ${axr_icon_SOURCES}
     ${hss_SOURCES}
@@ -40,6 +38,7 @@ if(APPLE)
         ../3rdparty/qtmacextras/src/qtmactoolbutton.mm
         ../3rdparty/qtmacextras/src/qtmactoolbutton.h
         ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.mm
+        ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.h
         ../3rdparty/qtmacextras/src/qtnstoolbar.mm
         ../3rdparty/qtmacextras/src/qtnstoolbar.h
     )
