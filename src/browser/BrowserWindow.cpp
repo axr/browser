@@ -43,6 +43,7 @@
 
 #include <QErrorMessage>
 #include <QFileDialog>
+#include <QMimeData>
 #include <QPaintEvent>
 #include <QTextEdit>
 #include <QUrl>
