@@ -50,7 +50,6 @@
 #include "AXRController.h"
 #include "AXRDebugging.h"
 #include "AXRDocument.h"
-#include "AXRTestRunner.h"
 #include "XMLParser.h"
 
 #include "LogWindow.h"
@@ -69,7 +68,6 @@ public:
     Private()
     {
         document = new AXRDocument();
-        testRunner = new AXRTestRunner();
         axr_debug_device = qApp->loggingDevice();
     }
 
@@ -78,11 +76,9 @@ public:
         axr_debug_device = NULL;
 
         delete document;
-        delete testRunner;
     }
 
     AXRDocument *document;
-    AXRTestRunner *testRunner;
 };
 
 BrowserWindow::BrowserWindow(QWidget *parent)
@@ -107,12 +103,6 @@ BrowserWindow::BrowserWindow(QWidget *parent)
 
     ui->previousLayoutStepAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_K));
     ui->nextLayoutStepAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_L));
-
-    ui->listXmlElementsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_X));
-    ui->listHssStatementsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_C));
-    ui->listHssTokensAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_V));
-
-    ui->runLayoutTestsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_T));
 
     ui->logAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
 
@@ -230,104 +220,6 @@ void BrowserWindow::nextLayoutStep()
     d->document->setShowLayoutSteps(true);
     d->document->nextLayoutStep();
     update();
-}
-
-void BrowserWindow::listXmlElements()
-{
-    AXRString file = QFileDialog::getOpenFileName(this, tr("Open XML File"), AXRString(), "XML Files (*.xml)");
-    if (!file.isEmpty())
-    {
-        QFile qfile(file);
-        QFileInfo fi(qfile);
-        qfile.open(QIODevice::ReadOnly);
-
-        AXRBuffer::p f(new AXRBuffer(fi));
-
-        AXRController *controller = new AXRController(d->document);
-        XMLParser parser(controller);
-
-        if (!parser.loadFile(f))
-        {
-            QErrorMessage error(this);
-            error.showMessage(AXR::fromStdString("Could not parse the given file"));
-        }
-
-        LogWindow w(this);
-        w.setLogText(controller->toString());
-        w.exec();
-    }
-}
-
-void BrowserWindow::listHssStatements()
-{
-    AXRString file = QFileDialog::getOpenFileName(this, tr("Open HSS File"), AXRString(), "HSS Files (*.hss)");
-    if (!file.isEmpty())
-    {
-        QFile qfile(file);
-        QFileInfo fi(qfile);
-        qfile.open(QIODevice::ReadOnly);
-
-        AXRBuffer::p f(new AXRBuffer(fi));
-
-        AXRController controller(d->document);
-        HSSParser hssparser(&controller);
-
-        if (hssparser.loadFile(f))
-        {
-            /*const std::vector<AXR::HSSStatement::p> statements = controller.getStatements();
-            for (unsigned i = 0; i < statements.size(); ++i)
-            {
-                std_log1(statements[i]->toString());
-            }*/
-        }
-        else
-        {
-            QErrorMessage error(this);
-            error.showMessage(AXR::fromStdString("Could not parse the given file"));
-        }
-    }
-}
-
-void BrowserWindow::listHssTokens()
-{
-    AXRString file = QFileDialog::getOpenFileName(this, tr("Open HSS File"), AXRString(), "HSS Files (*.hss)");
-    if (!file.isEmpty())
-    {
-        QFile qfile(file);
-        QFileInfo fi(qfile);
-        qfile.open(QIODevice::ReadOnly);
-
-        AXRBuffer::p f(new AXRBuffer(fi));
-
-        HSSTokenizer tokenizer;
-        tokenizer.setFile(f);
-
-        tokenizer.readNextChar();
-
-        AXR::HSSToken::p token;
-        AXRString ss;
-        forever
-        {
-            if (token)
-                token.clear();
-
-            token = tokenizer.readNextToken();
-
-            if (!token)
-                break;
-
-            ss += token->toString() + "\n";
-        }
-
-        QErrorMessage error(this);
-        error.showMessage(ss);
-    }
-}
-
-void BrowserWindow::runLayoutTests()
-{
-    d->document->registerCustomFunction("AXRLayoutTestsExecute", new HSSValueChangedCallback<AXRTestRunner>(d->testRunner, &AXRTestRunner::executeLayoutTests));
-    this->openFile(d->testRunner->getPathToTestsFile());
 }
 
 void BrowserWindow::showErrorLog()

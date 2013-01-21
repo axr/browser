@@ -56,9 +56,6 @@ qt_transform_sources(browser_SOURCES "${browser_SOURCES}")
 add_executable(${TARGET_NAME_APP_BROWSER} WIN32 MACOSX_BUNDLE ${browser_SOURCES})
 target_link_libraries(${TARGET_NAME_APP_BROWSER} ${TARGET_NAME_LIB_CORE} "${TARGET_NAME_LIB_QT}" ${QT_QTMAIN_LIBRARY} ${COCOA_LIBRARY})
 
-# TODO: Temporary until TEST target is removed
-target_link_libraries(${TARGET_NAME_APP_BROWSER} TEST)
-
 set(MACOSX_BUNDLE_ICON_FILE prototype.icns)
 
 set_source_files_properties(${axr_icon_SOURCES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)

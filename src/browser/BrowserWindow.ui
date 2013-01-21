@@ -55,12 +55,6 @@
     </property>
     <addaction name="previousLayoutStepAction"/>
     <addaction name="nextLayoutStepAction"/>
-    <addaction name="separator"/>
-    <addaction name="listXmlElementsAction"/>
-    <addaction name="listHssStatementsAction"/>
-    <addaction name="listHssTokensAction"/>
-    <addaction name="separator"/>
-    <addaction name="runLayoutTestsAction"/>
    </widget>
    <widget class="QMenu" name="windowMenu">
     <property name="title">

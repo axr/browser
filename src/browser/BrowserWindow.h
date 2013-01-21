@@ -72,10 +72,6 @@ public slots:
     void closeFile();
     void previousLayoutStep();
     void nextLayoutStep();
-    void listXmlElements();
-    void listHssStatements();
-    void listHssTokens();
-    void runLayoutTests();
     void showErrorLog();
     void showPreferences();
     void showAbout();
