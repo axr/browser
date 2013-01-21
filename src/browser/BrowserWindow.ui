@@ -411,10 +411,6 @@
   <slot>reloadFile()</slot>
   <slot>previousLayoutStep()</slot>
   <slot>nextLayoutStep()</slot>
-  <slot>listXmlElements()</slot>
-  <slot>listHssStatements()</slot>
-  <slot>listHssTokens()</slot>
-  <slot>runLayoutTests()</slot>
   <slot>showErrorLog()</slot>
   <slot>showAbout()</slot>
   <slot>toggleAntialiasing(bool)</slot>
