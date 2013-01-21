@@ -6,9 +6,14 @@ Application {
     Depends { name: "cpp" }
     Depends { name: "axrcore" }
     Depends { name: "axrqt" }
-    Depends { name: "Qt"; submodules: [ "core", "gui" ] }
+    Depends { name: "Qt"; submodules: [ "core", "gui", "widgets" ] }
 
-    files: [ "*.h", "*.cpp", "*.ui", "*.qrc", "*.rc" ]
+    files: [ "*.h", "*.cpp", "*.ui", "*.qrc", "*.rc", "../3rdparty/qtmacextras/src/*.h", "../3rdparty/qtmacextras/src/*.mm" ]
 
-    cpp.includePaths: product.buildDirectory
+    cpp.includePaths: [ "../3rdparty/qtmacextras/src", product.buildDirectory ]
+
+    Properties {
+        condition: qbs.targetOS === "mac"
+        cpp.frameworks: "Cocoa"
+    }
 }
