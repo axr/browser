@@ -120,26 +120,6 @@
     <string>Next Layout Step</string>
    </property>
   </action>
-  <action name="listXmlElementsAction">
-   <property name="text">
-    <string>List XML Elements</string>
-   </property>
-  </action>
-  <action name="listHssStatementsAction">
-   <property name="text">
-    <string>List HSS Statements</string>
-   </property>
-  </action>
-  <action name="listHssTokensAction">
-   <property name="text">
-    <string>List HSS Tokens</string>
-   </property>
-  </action>
-  <action name="runLayoutTestsAction">
-   <property name="text">
-    <string>Run Layout Tests</string>
-   </property>
-  </action>
   <action name="logAction">
    <property name="text">
     <string>Log</string>
