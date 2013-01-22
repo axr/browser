@@ -45,9 +45,9 @@
 #define __AXR__BrowserSettings__
 
 #include <QtGlobal>
-#include <QString>
 
 class QSettings;
+class QString;
 
 class BrowserSettings
 {

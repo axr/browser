@@ -45,7 +45,6 @@
 #define AXR_BROWSER_BROWSERWINDOW
 
 #include <QMainWindow>
-#include "AXRString.h"
 
 namespace Ui
 {
