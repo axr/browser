@@ -51,6 +51,7 @@
 #include "AXRController.h"
 #include "AXRDebugging.h"
 #include "AXRDocument.h"
+#include "AXRRender.h"
 #include "XMLParser.h"
 
 #include "LogWindow.h"
