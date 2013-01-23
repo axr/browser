@@ -89,6 +89,14 @@ BrowserApplication::BrowserApplication(int &argc, char **argv)
     // Check if the user wanted to load a file by command line
     QStringList args = arguments();
     args.removeFirst();
+
+    // TODO: Xcode adds these; find a better way around it
+    if (args.size() >= 2 && args.at(0) == "-NSDocumentRevisionsDebugMode" && (args.at(1) == "YES" || args.at(1) == "NO"))
+    {
+        args.removeFirst();
+        args.removeFirst();
+    }
+
     if (!args.empty())
     {
         d->mainWindow->openFiles(args);

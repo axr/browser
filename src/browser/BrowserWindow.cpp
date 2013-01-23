@@ -107,7 +107,8 @@ BrowserWindow::BrowserWindow(QWidget *parent)
 
     ui->logAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
 
-    this->closeFile();
+    setWindowTitle(QCoreApplication::applicationName());
+    setWindowFilePath(QString());
 }
 
 BrowserWindow::~BrowserWindow()
@@ -172,7 +173,7 @@ void BrowserWindow::openFile()
 
 void BrowserWindow::openFile(const QString &filePath)
 {
-    setWindowTitle(QString());
+    setWindowTitle(filePath.isEmpty() ? QCoreApplication::applicationName() : QString());
     setWindowFilePath(filePath);
 
     d->document->loadFileByPath(QUrl::fromLocalFile(filePath));
