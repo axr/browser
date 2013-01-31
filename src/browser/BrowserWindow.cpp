@@ -51,7 +51,7 @@
 #include "AXRController.h"
 #include "AXRDebugging.h"
 #include "AXRDocument.h"
-#include "AXRRender.h"
+#include "HSSRenderer.h"
 #include "XMLParser.h"
 
 #include "LogWindow.h"
@@ -88,7 +88,7 @@ BrowserWindow::BrowserWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->enableAntialiasingAction->setChecked(d->document->getRender()->globalAntialiasingEnabled());
+    ui->enableAntialiasingAction->setChecked(ui->renderingView->renderer()->isGlobalAntialiasingEnabled());
 
     // Tell the widget to render this window's document
     ui->renderingView->setDocument(d->document);
@@ -242,6 +242,6 @@ void BrowserWindow::showAbout()
 
 void BrowserWindow::toggleAntialiasing(bool on)
 {
-    d->document->getRender()->setGlobalAntialiasingEnabled(on);
+    ui->renderingView->renderer()->setGlobalAntialiasingEnabled(on);
     update();
 }
