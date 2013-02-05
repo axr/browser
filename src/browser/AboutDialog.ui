@@ -40,7 +40,7 @@
    <item>
     <widget class="QLabel" name="copyrightLabel">
      <property name="text">
-      <string>Copyright (c) 2010-2012 AXR Project Contributors. All Rights Reserved.</string>
+      <string>Copyright (c) 2010-2013 AXR Project Contributors. All Rights Reserved.</string>
      </property>
     </widget>
    </item>
