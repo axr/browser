@@ -24,11 +24,11 @@
 			<string>Viewer</string>
 			<key>NSExportableTypes</key>
 			<array>
-				<string>vg.axr.hss</string>
+				<string>org.axrproject.hss</string>
 			</array>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>vg.axr.hss</string>
+				<string>org.axrproject.hss</string>
 			</array>
 		</dict>
 		<dict>
@@ -51,7 +51,7 @@
 	<key>CFBundleIconFile</key>
 	<string>${MACOSX_BUNDLE_ICON_FILE}</string>
 	<key>CFBundleIdentifier</key>
-	<string>vg.axr.browser</string>
+	<string>org.axrproject.browser</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -109,9 +109,9 @@
 			<key>UTTypeIconFile</key>
 			<string>hss.icns</string>
 			<key>UTTypeIdentifier</key>
-			<string>vg.axr.hss</string>
+			<string>org.axrproject.hss</string>
 			<key>UTTypeReferenceURL</key>
-			<string>http://spec.axr.vg/</string>
+			<string>http://spec.axrproject.org/</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>com.apple.ostype</key>
