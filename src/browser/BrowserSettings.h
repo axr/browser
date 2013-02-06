@@ -44,7 +44,7 @@
 #ifndef __AXR__BrowserSettings__
 #define __AXR__BrowserSettings__
 
-#include <QtGlobal>
+#include "AXRLoggerEnums.h"
 
 class QSettings;
 class QString;
@@ -73,8 +73,8 @@ public:
     bool autoReload() const;
     void setAutoReload(bool autoReload);
 
-    quint32 debuggingChannelsMask() const;
-    void setDebuggingChannelsMask(quint32 mask);
+    AXR::AXRLoggerChannels debuggingChannelsMask() const;
+    void setDebuggingChannelsMask(AXR::AXRLoggerChannels mask);
 
 private:
     class Private;

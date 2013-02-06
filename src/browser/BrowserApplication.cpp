@@ -47,7 +47,6 @@
 #include <QMessageBox>
 #include <QUrl>
 #include "config.h"
-#include "AXRDebugging.h"
 #include "AXRWarning.h"
 #include "LogWindow.h"
 #include "PreferencesDialog.h"
@@ -116,8 +115,6 @@ BrowserApplication::BrowserApplication(int &argc, char **argv)
                 break;
         }
     }
-
-    axr_debug_activate_channel(d->settings->debuggingChannelsMask());
 }
 
 BrowserApplication::~BrowserApplication()
@@ -177,11 +174,6 @@ bool BrowserApplication::notify(QObject *receiver, QEvent *event)
 BrowserSettings* BrowserApplication::settings() const
 {
     return d->settings;
-}
-
-QIODevice* BrowserApplication::loggingDevice() const
-{
-    return d->logWindow->logBuffer();
 }
 
 void BrowserApplication::showPreferencesDialog()

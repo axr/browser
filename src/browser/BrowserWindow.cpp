@@ -49,7 +49,6 @@
 #include <QUrl>
 
 #include "AXRController.h"
-#include "AXRDebugging.h"
 #include "AXRDocument.h"
 #include "HSSRenderer.h"
 #include "XMLParser.h"
@@ -70,13 +69,10 @@ public:
     Private()
     {
         document = new AXRDocument();
-        axr_debug_device = qApp->loggingDevice();
     }
 
     ~Private()
     {
-        axr_debug_device = NULL;
-
         delete document;
     }
 

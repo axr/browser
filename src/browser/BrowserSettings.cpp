@@ -103,12 +103,12 @@ void BrowserSettings::setAutoReload(bool autoReload)
     d->settings->setValue(key_autoReload, autoReload);
 }
 
-quint32 BrowserSettings::debuggingChannelsMask() const
+AXR::AXRLoggerChannels BrowserSettings::debuggingChannelsMask() const
 {
-    return static_cast<quint32>(d->settings->value(key_debuggingChannelsMask, 0).toULongLong());
+    return static_cast<AXR::AXRLoggerChannels>(d->settings->value(key_debuggingChannelsMask, 0).toULongLong());
 }
 
-void BrowserSettings::setDebuggingChannelsMask(quint32 mask)
+void BrowserSettings::setDebuggingChannelsMask(AXR::AXRLoggerChannels mask)
 {
     d->settings->setValue(key_debuggingChannelsMask, static_cast<qulonglong>(mask));
 }

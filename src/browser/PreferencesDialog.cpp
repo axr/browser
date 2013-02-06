@@ -46,7 +46,6 @@
 #include <QIcon>
 #include <QSettings>
 #include <QToolBar>
-#include "AXRDebugging.h"
 #include "PreferencesDialog.h"
 #include "BrowserApplication.h"
 #include "BrowserSettings.h"
@@ -98,21 +97,6 @@ void PreferencesDialog::loadPreferences()
 {
     ui->fileLaunchActionComboBox->setCurrentIndex(qApp->settings()->fileLaunchAction());
     ui->autoReloadCheckBox->setChecked(qApp->settings()->autoReload());
-
-    quint32 mask = qApp->settings()->debuggingChannelsMask();
-    ui->onChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_ON);
-    ui->overviewChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_OVERVIEW);
-    ui->generalChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_GENERAL);
-    ui->generalSpecificChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_GENERAL_SPECIFIC);
-    ui->xmlChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_XML);
-    ui->hssChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_HSS);
-    ui->observingChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_OBSERVING);
-    ui->eventsChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_EVENTS);
-    ui->eventsSpecificChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_EVENTS_SPECIFIC);
-    ui->tokenizingChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_TOKENIZING);
-    ui->fullFilenamesChannelCheckBox->setChecked(mask & AXR_DEBUG_CH_FULL_FILENAMES);
-
-    d->finishedLoading = true;
 }
 
 void PreferencesDialog::accept()
@@ -124,21 +108,6 @@ void PreferencesDialog::accept()
 
     qApp->settings()->setFileLaunchAction(static_cast<BrowserSettings::FileLaunchAction>(ui->fileLaunchActionComboBox->currentIndex()));
     qApp->settings()->setAutoReload(ui->autoReloadCheckBox->isChecked());
-
-    quint32 mask = 0;
-    mask |= ui->onChannelCheckBox->isChecked() ? AXR_DEBUG_CH_ON : 0;
-    mask |= ui->overviewChannelCheckBox->isChecked() ? AXR_DEBUG_CH_OVERVIEW : 0;
-    mask |= ui->generalChannelCheckBox->isChecked() ? AXR_DEBUG_CH_GENERAL : 0;
-    mask |= ui->generalSpecificChannelCheckBox->isChecked() ? AXR_DEBUG_CH_GENERAL_SPECIFIC : 0;
-    mask |= ui->xmlChannelCheckBox->isChecked() ? AXR_DEBUG_CH_XML : 0;
-    mask |= ui->hssChannelCheckBox->isChecked() ? AXR_DEBUG_CH_HSS : 0;
-    mask |= ui->observingChannelCheckBox->isChecked() ? AXR_DEBUG_CH_OBSERVING : 0;
-    mask |= ui->eventsChannelCheckBox->isChecked() ? AXR_DEBUG_CH_EVENTS : 0;
-    mask |= ui->eventsSpecificChannelCheckBox->isChecked() ? AXR_DEBUG_CH_EVENTS_SPECIFIC : 0;
-    mask |= ui->tokenizingChannelCheckBox->isChecked() ? AXR_DEBUG_CH_TOKENIZING : 0;
-    mask |= ui->fullFilenamesChannelCheckBox->isChecked() ? AXR_DEBUG_CH_FULL_FILENAMES : 0;
-    qApp->settings()->setDebuggingChannelsMask(mask);
-    axr_debug_activate_channel(mask);
 
 #ifndef Q_OS_MAC
     close();

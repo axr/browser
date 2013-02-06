@@ -45,30 +45,37 @@
 #define AXR_BROWSER_LOGWINDOW
 
 #include <QDialog>
+#include "AXRAbstractLogger.h"
 #include "AXRString.h"
+
+class QAbstractButton;
 
 namespace Ui
 {
     class LogWindow;
 }
 
-class LogWindow : public QDialog
+class LogWindow : public QDialog, public AXR::AXRAbstractLogger
 {
     Q_OBJECT
 
 public:
     LogWindow(QWidget *parent = NULL);
     virtual ~LogWindow();
-    AXR::AXRString logText() const;
-    QIODevice* logBuffer() const;
 
 public slots:
-    void setLogText(const AXR::AXRString &text);
     void appendLogText(const AXR::AXRString &text);
     void clearLogText();
-    void dataLogged(qint64 bytes);
+
+protected:
+    void log(AXR::AXRLoggerChannel channel, const AXR::AXRString &message, bool newLine);
+
+private slots:
+    void channelButtonClicked(QAbstractButton*);
 
 private:
+    void checkAllButton();
+
     class Private;
     Private *d;
     Ui::LogWindow *ui;

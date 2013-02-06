@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>400</height>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,14 +21,332 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QPlainTextEdit" name="logTextEdit">
-     <property name="readOnly">
-      <bool>true</bool>
+    <widget class="QSplitter" name="splitter">
+     <property name="styleSheet">
+      <string notr="true">QSplitter::handle { image: none }</string>
      </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="handleWidth">
+      <number>1</number>
+     </property>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>303</width>
+         <height>450</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="debuggingChannelsLabel">
+          <property name="text">
+           <string>Debugging Channels</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="allChannelsCheckBox">
+          <property name="toolTip">
+           <string>Debug on/off</string>
+          </property>
+          <property name="text">
+           <string>All</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="userErrorChannelCheckBox">
+          <property name="toolTip">
+           <string>Errors that are displayed to the user</string>
+          </property>
+          <property name="text">
+           <string>Errors</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="userWarningChannelCheckBox">
+          <property name="toolTip">
+           <string>Warnings that are displayed to the user</string>
+          </property>
+          <property name="text">
+           <string>Warnings</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="overviewChannelCheckBox">
+          <property name="toolTip">
+           <string>Basic high level actions</string>
+          </property>
+          <property name="text">
+           <string>Overview</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="generalChannelCheckBox">
+          <property name="toolTip">
+           <string>General actions in the system</string>
+          </property>
+          <property name="text">
+           <string>General</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="generalSpecificChannelCheckBox">
+          <property name="toolTip">
+           <string>General actions in the system, more fine grained</string>
+          </property>
+          <property name="text">
+           <string>General - Specific</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ioChannelCheckBox">
+          <property name="toolTip">
+           <string>Events related to disk I/O</string>
+          </property>
+          <property name="text">
+           <string>I/O</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="networkChannelCheckBox">
+          <property name="toolTip">
+           <string>Events related to network I/O</string>
+          </property>
+          <property name="text">
+           <string>Network</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="xmlChannelCheckBox">
+          <property name="toolTip">
+           <string>XML parsing events</string>
+          </property>
+          <property name="text">
+           <string>XML Parsing</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="hssChannelCheckBox">
+          <property name="toolTip">
+           <string>HSS parsing events</string>
+          </property>
+          <property name="text">
+           <string>HSS Parsing</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="tokenizingChannelCheckBox">
+          <property name="toolTip">
+           <string>Prints the characters read by the HSS tokenizer</string>
+          </property>
+          <property name="text">
+           <string>HSS Tokenizing</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="layoutChannelCheckBox">
+          <property name="toolTip">
+           <string>HSS document layout calculation</string>
+          </property>
+          <property name="text">
+           <string>Layout</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="renderingChannelCheckBox">
+          <property name="toolTip">
+           <string>Rendering (painting) events</string>
+          </property>
+          <property name="text">
+           <string>Rendering</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="observingChannelCheckBox">
+          <property name="toolTip">
+           <string>Adding, removing and notifying of observers</string>
+          </property>
+          <property name="text">
+           <string>Observing</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="eventsChannelCheckBox">
+          <property name="toolTip">
+           <string>Messages related to event handling</string>
+          </property>
+          <property name="text">
+           <string>Events</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="eventsSpecificChannelCheckBox">
+          <property name="toolTip">
+           <string>Messages related to event handling, more fine grained</string>
+          </property>
+          <property name="text">
+           <string>Events - Specific</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">channelsButtonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearLogPushButton">
+          <property name="text">
+           <string>Clear Log</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="openExternalLinks">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>channelsButtonGroup</sender>
+   <signal>buttonClicked(QAbstractButton*)</signal>
+   <receiver>LogWindow</receiver>
+   <slot>channelButtonClicked(QAbstractButton*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearLogPushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>textBrowser</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>151</x>
+     <y>379</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>551</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>channelButtonClicked(QAbstractButton*)</slot>
+ </slots>
+ <buttongroups>
+  <buttongroup name="channelsButtonGroup">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

@@ -58,7 +58,6 @@ public:
     virtual ~BrowserApplication();
     inline static BrowserApplication* instance() { return qobject_cast<BrowserApplication*>(QApplication::instance()); }
     BrowserSettings* settings() const;
-    QIODevice* loggingDevice() const;
     void showPreferencesDialog();
     void showLogWindow();
     void showAboutDialog();
