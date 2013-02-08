@@ -97,6 +97,8 @@ void PreferencesDialog::loadPreferences()
 {
     ui->fileLaunchActionComboBox->setCurrentIndex(qApp->settings()->fileLaunchAction());
     ui->autoReloadCheckBox->setChecked(qApp->settings()->autoReload());
+
+    d->finishedLoading = true;
 }
 
 void PreferencesDialog::accept()
