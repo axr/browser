@@ -1,9 +1,9 @@
 [submodule "src/core"]
 	path = src/core
-	url = https://github.com/axr/core.git
+	url = ../core.git
 [submodule "common"]
 	path = common
-	url = https://github.com/axr/common.git
+	url = ../common.git
 [submodule "src/3rdparty/qtmacextras"]
 	path = src/3rdparty/qtmacextras
 	url = https://git.gitorious.org/qtplayground/qtmacextras.git
