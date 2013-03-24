@@ -191,6 +191,8 @@ void BrowserWindow::openFiles(const QStringList &filePaths)
 void BrowserWindow::reloadFile()
 {
     d->document->reload();
+    qApp->unwatchPath(windowFilePath());
+    qApp->watchPath(windowFilePath());
     update();
 }
 
