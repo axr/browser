@@ -136,14 +136,10 @@ bool BrowserApplication::event(QEvent *e)
     {
         case QEvent::FileOpen:
         {
-            QFileOpenEvent *open = static_cast<QFileOpenEvent*>(e);
+            const QUrl url = static_cast<QFileOpenEvent*>(e)->url();
+            if (url.isLocalFile())
+                d->mainWindow->openFile(url.path());
 
-            // TODO: this gets //localhost appended to the front for some reason
-            QUrl url = open->url();
-            if (url.scheme() == "file" && url.host() == "localhost")
-                url.setHost(QString());
-
-            d->mainWindow->openFile(url.toLocalFile());
             return true;
         }
         default:
