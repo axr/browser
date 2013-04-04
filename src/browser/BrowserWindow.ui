@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1200</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -34,7 +34,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1200</width>
      <height>22</height>
     </rect>
    </property>
@@ -86,6 +86,26 @@
    <addaction name="toolsMenu"/>
    <addaction name="windowMenu"/>
    <addaction name="helpMenu"/>
+  </widget>
+  <widget class="QToolBar" name="navigationToolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="backAction"/>
+   <addaction name="forwardAction"/>
+   <addaction name="reloadAction"/>
   </widget>
   <action name="openAction">
    <property name="text">
@@ -147,6 +167,16 @@
    </property>
    <property name="menuRole">
     <enum>QAction::PreferencesRole</enum>
+   </property>
+  </action>
+  <action name="backAction">
+   <property name="text">
+    <string>Back</string>
+   </property>
+  </action>
+  <action name="forwardAction">
+   <property name="text">
+    <string>Forward</string>
    </property>
   </action>
  </widget>

@@ -65,6 +65,7 @@ protected:
 
 public slots:
     void openFile();
+    void openAddressBarUrl();
     void openFile(const QString &filePath);
     void openFiles(const QStringList &filePaths);
     void reloadFile();

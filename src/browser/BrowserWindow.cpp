@@ -41,8 +41,10 @@
  *
  ********************************************************************/
 
+#include <QDebug>
 #include <QErrorMessage>
 #include <QFileDialog>
+#include <QLineEdit>
 #include <QMimeData>
 #include <QPaintEvent>
 #include <QTextEdit>
@@ -67,16 +69,20 @@ class BrowserWindow::Private
 {
 public:
     Private()
+    : document(), addressBar(new QLineEdit)
     {
-        document = new AXRDocument();
+        addressBar->setAttribute(Qt::WA_MacShowFocusRect, false);
+        addressBar->setStyleSheet("QLineEdit { padding: 1 4 2 4; border: 1px solid #999; border-radius: 3px; }");
     }
 
     ~Private()
     {
-        delete document;
+        if (document)
+            delete document;
     }
 
     AXRDocument *document;
+    QLineEdit *addressBar;
 };
 
 BrowserWindow::BrowserWindow(QWidget *parent)
@@ -84,10 +90,9 @@ BrowserWindow::BrowserWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->enableAntialiasingAction->setChecked(ui->renderingView->renderer()->isGlobalAntialiasingEnabled());
+    connect(d->addressBar, SIGNAL(returnPressed()), SLOT(openAddressBarUrl()));
 
-    // Tell the widget to render this window's document
-    ui->renderingView->setDocument(d->document);
+    ui->enableAntialiasingAction->setChecked(ui->renderingView->renderer()->isGlobalAntialiasingEnabled());
 
     // The subview needs to accept drops as well even though the main window handles it
     ui->renderingView->setAcceptDrops(true);
@@ -103,6 +108,8 @@ BrowserWindow::BrowserWindow(QWidget *parent)
     ui->nextLayoutStepAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_L));
 
     ui->logAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
+
+    ui->navigationToolBar->addWidget(d->addressBar);
 
     setWindowTitle(QCoreApplication::applicationName());
     setWindowFilePath(QString());
@@ -168,11 +175,32 @@ void BrowserWindow::openFile()
     }
 }
 
+void BrowserWindow::openAddressBarUrl()
+{
+    const QUrl url = QUrl(d->addressBar->text());
+    if (url.isLocalFile())
+        openFile(url.path());
+    else
+    {
+        qDebug() << url.scheme() << "is not yet supported";
+        closeFile();
+    }
+}
+
 void BrowserWindow::openFile(const QString &filePath)
 {
     setWindowTitle(filePath.isEmpty() ? QCoreApplication::applicationName() : QString());
     setWindowFilePath(filePath);
+    d->addressBar->setText(QUrl::fromLocalFile(filePath).toString());
 
+    // Delete document
+    if (d->document)
+    {
+        ui->renderingView->setDocument(0);
+        delete d->document;
+    }
+
+    ui->renderingView->setDocument(d->document = new AXRDocument);
     d->document->loadFileByPath(QUrl::fromLocalFile(filePath));
     qApp->watchPath(filePath);
     qApp->settings()->setLastFileOpened(filePath);
@@ -190,6 +218,9 @@ void BrowserWindow::openFiles(const QStringList &filePaths)
 
 void BrowserWindow::reloadFile()
 {
+    if (!d->document)
+        return;
+
     d->document->reload();
     qApp->unwatchPath(windowFilePath());
     qApp->watchPath(windowFilePath());
@@ -205,12 +236,22 @@ void BrowserWindow::closeFile()
 
     setWindowTitle(QCoreApplication::applicationName());
     setWindowFilePath(QString());
+    d->addressBar->clear();
 
-    // TODO: Actually close the file...
+    // Remove the document from the renderer and delete it
+    if (d->document)
+    {
+        ui->renderingView->setDocument(0);
+        delete d->document;
+        d->document = 0;
+    }
 }
 
 void BrowserWindow::previousLayoutStep()
 {
+    if (!d->document)
+        return;
+
     d->document->setShowLayoutSteps(true);
     d->document->previousLayoutStep();
     update();
@@ -218,6 +259,9 @@ void BrowserWindow::previousLayoutStep()
 
 void BrowserWindow::nextLayoutStep()
 {
+    if (!d->document)
+        return;
+
     d->document->setShowLayoutSteps(true);
     d->document->nextLayoutStep();
     update();
