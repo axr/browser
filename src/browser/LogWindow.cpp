@@ -51,45 +51,6 @@ using namespace AXR;
 
 #include "ui_LogWindow.h"
 
-QString channelToClassName(AXRLoggerChannel channel)
-{
-    switch (channel)
-    {
-        case LoggerChannelUserError:
-            return QLatin1String("LoggerChannelUserError");
-        case LoggerChannelUserWarning:
-            return QLatin1String("LoggerChannelUserWarning");
-        case LoggerChannelOverview:
-            return QLatin1String("LoggerChannelOverview");
-        case LoggerChannelGeneral:
-            return QLatin1String("LoggerChannelGeneral");
-        case LoggerChannelGeneralSpecific:
-            return QLatin1String("LoggerChannelGeneralSpecific");
-        case LoggerChannelIO:
-            return QLatin1String("LoggerChannelIO");
-        case LoggerChannelNetwork:
-            return QLatin1String("LoggerChannelNetwork");
-        case LoggerChannelXMLParser:
-            return QLatin1String("LoggerChannelXMLParser");
-        case LoggerChannelHSSParser:
-            return QLatin1String("LoggerChannelHSSParser");
-        case LoggerChannelHSSTokenizer:
-            return QLatin1String("LoggerChannelHSSTokenizer");
-        case LoggerChannelLayout:
-            return QLatin1String("LoggerChannelLayout");
-        case LoggerChannelRendering:
-            return QLatin1String("LoggerChannelRendering");
-        case LoggerChannelObserving:
-            return QLatin1String("LoggerChannelObserving");
-        case LoggerChannelEvents:
-            return QLatin1String("LoggerChannelEvents");
-        case LoggerChannelEventsSpecific:
-            return QLatin1String("LoggerChannelEventsSpecific");
-        default:
-            return QString();
-    }
-}
-
 QString channelToDisplayName(AXRLoggerChannel channel)
 {
     switch (channel)
@@ -140,11 +101,11 @@ public:
 };
 
 LogWindow::LogWindow(QWidget *parent)
-: QDialog(parent), d(new Private()), ui(new Ui::LogWindow)
+: QDialog(parent), AXRAbstractLogger("Log Window"), d(new Private()), ui(new Ui::LogWindow)
 {
     this->ui->setupUi(this);
 
-    AXRLoggerChannels mask = qApp->settings()->debuggingChannelsMask();
+    AXRLoggerChannels mask = qApp->settings()->loggerChannelsMap().value(name());
     setActiveChannels(mask);
     ui->userErrorChannelCheckBox->setChecked(mask & LoggerChannelUserError);
     ui->userWarningChannelCheckBox->setChecked(mask & LoggerChannelUserWarning);
@@ -165,19 +126,17 @@ LogWindow::LogWindow(QWidget *parent)
     d->finishedLoading = true;
 
     clearLogText();
-    AXRLoggerManager::instance().addLogger(this);
 }
 
 LogWindow::~LogWindow()
 {
-    AXRLoggerManager::instance().removeLogger(this);
     delete d;
     delete ui;
 }
 
 void LogWindow::log(AXRLoggerChannel channel, const AXR::AXRString &message, bool)
 {
-    appendLogText(QString("<div class='%1'><span class='label'><b>%2:</b></span> %3</div>").arg(channelToClassName(channel)).arg(channelToDisplayName(channel)).arg(message));
+    appendLogText(QString("<div class='%1'><span class='label'><b>%2:</b></span> %3</div>").arg(channelToDisplayName(channel)).arg(channelToDisplayName(channel)).arg(message));
 }
 
 void LogWindow::appendLogText(const AXRString &text)
@@ -220,7 +179,9 @@ void LogWindow::channelButtonClicked(QAbstractButton *sender)
     if (ui->observingChannelCheckBox->isChecked()) mask |= LoggerChannelObserving;
     if (ui->eventsChannelCheckBox->isChecked()) mask |= LoggerChannelEvents;
     if (ui->eventsSpecificChannelCheckBox->isChecked()) mask |= LoggerChannelEventsSpecific;
-    qApp->settings()->setDebuggingChannelsMask(mask);
+    QMap<QString, AXRLoggerChannels> map = qApp->settings()->loggerChannelsMap();
+    map.insert(name(), mask);
+    qApp->settings()->setLoggerChannelsMap(map);
     setActiveChannels(mask);
 }
 

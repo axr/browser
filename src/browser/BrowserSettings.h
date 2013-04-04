@@ -73,8 +73,11 @@ public:
     bool autoReload() const;
     void setAutoReload(bool autoReload);
 
-    AXR::AXRLoggerChannels debuggingChannelsMask() const;
-    void setDebuggingChannelsMask(AXR::AXRLoggerChannels mask);
+    QStringList enabledLoggers() const;
+    void setEnabledLoggers(const QStringList &loggers);
+
+    QMap<QString, AXR::AXRLoggerChannels> loggerChannelsMap() const;
+    void setLoggerChannelsMap(const QMap<QString, AXR::AXRLoggerChannels> &map);
 
 private:
     class Private;

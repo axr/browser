@@ -46,6 +46,13 @@
 
 #include <QApplication>
 
+namespace AXR
+{
+    class AXRAbstractLogger;
+}
+
+template <typename T> class QList;
+
 class QIODevice;
 class BrowserSettings;
 
@@ -64,6 +71,8 @@ public:
 
     void watchPath(const QString &path);
     void unwatchPath(const QString &path);
+
+    QList<AXR::AXRAbstractLogger*> availableLoggers() const;
 
 protected:
     bool event(QEvent *e);

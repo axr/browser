@@ -51,6 +51,8 @@ namespace Ui
     class PreferencesDialog;
 }
 
+class QListWidgetItem;
+
 class PreferencesDialog : public QMainWindow
 {
     Q_OBJECT
@@ -59,6 +61,9 @@ public:
     PreferencesDialog(QWidget *parent = NULL);
     virtual ~PreferencesDialog();
 
+protected:
+    bool event(QEvent *);
+
 public slots:
     void accept();
     void reject();
@@ -66,6 +71,9 @@ public slots:
 private slots:
     void preferenceChanged();
     void switchPage();
+    void selectedLoggerChanged();
+    void loggerActivationChanged(QListWidgetItem *loggerItem);
+    void channelChanged(QListWidgetItem *channelItem);
 
 private:
     void loadPreferences();

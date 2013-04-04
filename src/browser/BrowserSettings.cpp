@@ -44,11 +44,13 @@
 #include "BrowserSettings.h"
 #include <QtGlobal>
 #include <QSettings>
+#include <QStringList>
 
 #define key_fileLaunchAction "general/fileLaunchAction"
 #define key_lastFileOpened "general/lastFileOpened"
 #define key_autoReload "general/autoReload"
-#define key_debuggingChannelsMask "debug/channelsMask"
+#define key_enabledLoggers "debug/loggersEnabled"
+#define key_loggers "debug/loggers"
 
 class BrowserSettings::Private
 {
@@ -103,12 +105,39 @@ void BrowserSettings::setAutoReload(bool autoReload)
     d->settings->setValue(key_autoReload, autoReload);
 }
 
-AXR::AXRLoggerChannels BrowserSettings::debuggingChannelsMask() const
+QStringList BrowserSettings::enabledLoggers() const
 {
-    return static_cast<AXR::AXRLoggerChannels>(d->settings->value(key_debuggingChannelsMask, 0).toULongLong());
+    return d->settings->value(key_enabledLoggers).toStringList();
 }
 
-void BrowserSettings::setDebuggingChannelsMask(AXR::AXRLoggerChannels mask)
+void BrowserSettings::setEnabledLoggers(const QStringList &loggers)
 {
-    d->settings->setValue(key_debuggingChannelsMask, static_cast<qulonglong>(mask));
+    d->settings->setValue(key_enabledLoggers, loggers);
+}
+
+QMap<QString, AXR::AXRLoggerChannels> BrowserSettings::loggerChannelsMap() const
+{
+    QMap<QString, AXR::AXRLoggerChannels> map;
+    QMap<QString, QVariant> variantMap = d->settings->value(key_loggers).toMap();
+    QMapIterator<QString, QVariant> i(variantMap);
+    while (i.hasNext())
+    {
+        i.next();
+        map.insert(i.key(), static_cast<AXR::AXRLoggerChannels>(i.value().toULongLong()));
+    }
+
+    return map;
+}
+
+void BrowserSettings::setLoggerChannelsMap(const QMap<QString, AXR::AXRLoggerChannels> &map)
+{
+    QMap<QString, QVariant> variantMap;
+    QMapIterator<QString, AXR::AXRLoggerChannels> i(map);
+    while (i.hasNext())
+    {
+        i.next();
+        variantMap.insert(i.key(), QVariant::fromValue(static_cast<qulonglong>(i.value())));
+    }
+
+    d->settings->setValue(key_loggers, variantMap);
 }

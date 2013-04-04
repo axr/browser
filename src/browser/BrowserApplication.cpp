@@ -47,6 +47,8 @@
 #include <QMessageBox>
 #include <QUrl>
 #include "config.h"
+#include "AXRGenericLogger.h"
+#include "AXRLoggerManager.h"
 #include "AXRWarning.h"
 #include "LogWindow.h"
 #include "PreferencesDialog.h"
@@ -55,15 +57,26 @@
 #include "BrowserSettings.h"
 #include "BrowserWindow.h"
 
+using namespace AXR;
+
 class BrowserApplication::Private
 {
 public:
+    Private()
+    : settings(), preferencesDialog(), logWindow(), mainWindow(), aboutDialog(), watcher(),
+      stdoutLogger("stdout"), stderrLogger("stderr")
+    {
+    }
+
     BrowserSettings *settings;
     PreferencesDialog *preferencesDialog;
     LogWindow *logWindow;
     BrowserWindow *mainWindow;
     AboutDialog *aboutDialog;
     QFileSystemWatcher watcher;
+
+    AXRGenericLogger stdoutLogger;
+    AXRGenericLogger stderrLogger;
 };
 
 BrowserApplication::BrowserApplication(int &argc, char **argv)
@@ -76,14 +89,27 @@ BrowserApplication::BrowserApplication(int &argc, char **argv)
     setApplicationVersion(AXR_VERSION_STRING);
     setApplicationName("AXR Browser");
 
+    d->stdoutLogger.setStandardOutputDevice(AXR::LoggerChannelAll);
+    d->stderrLogger.setStandardErrorDevice(AXR::LoggerChannelAll);
+
     connect(&d->watcher, SIGNAL(fileChanged(QString)), this, SLOT(fileChanged(QString)));
 
     d->settings = new BrowserSettings();
-    d->preferencesDialog = new PreferencesDialog();
     d->aboutDialog = new AboutDialog();
     d->logWindow = new LogWindow();
+    d->preferencesDialog = new PreferencesDialog();
     d->mainWindow = new BrowserWindow();
     d->mainWindow->show();
+
+    // Restore logger settings
+    QMap<QString, AXRLoggerChannels> loggerChannelsMap = d->settings->loggerChannelsMap();
+    foreach (AXRAbstractLogger *logger, availableLoggers())
+    {
+        logger->setActiveChannels(loggerChannelsMap.value(logger->name()));
+
+        if (d->settings->enabledLoggers().contains(logger->name()))
+            AXRLoggerManager::instance().addLogger(logger);
+    }
 
     // Check if the user wanted to load a file by command line
     QStringList args = arguments();
@@ -119,6 +145,20 @@ BrowserApplication::BrowserApplication(int &argc, char **argv)
 
 BrowserApplication::~BrowserApplication()
 {
+    // Save logger settings
+    QMap<QString, AXRLoggerChannels> loggerChannelsMap;
+    QStringList enabledLoggers;
+    foreach (AXRAbstractLogger *logger, availableLoggers())
+    {
+        loggerChannelsMap.insert(logger->name(), logger->activeChannels());
+
+        if (AXRLoggerManager::instance().containsLogger(logger))
+            enabledLoggers.append(logger->name());
+    }
+
+    d->settings->setLoggerChannelsMap(loggerChannelsMap);
+    d->settings->setEnabledLoggers(enabledLoggers);
+
     delete d->mainWindow;
     delete d->aboutDialog;
     delete d->logWindow;
@@ -195,6 +235,13 @@ void BrowserApplication::watchPath(const QString &path)
 void BrowserApplication::unwatchPath(const QString &path)
 {
     d->watcher.removePath(QFileInfo(path).canonicalFilePath());
+}
+
+QList<AXRAbstractLogger*> BrowserApplication::availableLoggers() const
+{
+    QList<AXRAbstractLogger*> loggers;
+    loggers << d->logWindow << &d->stdoutLogger << &d->stderrLogger;
+    return loggers;
 }
 
 void BrowserApplication::fileChanged(const QString &path)
