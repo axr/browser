@@ -4,6 +4,9 @@ set -e
 # Clone all submodules
 git submodule update --init --recursive
 
+# Clone dependent repositories
+git clone https://github.com/axr/core.git ../core
+
 # Make build directories
 mkdir ../build
 

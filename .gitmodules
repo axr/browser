@@ -1,6 +1,3 @@
-[submodule "src/core"]
-	path = src/core
-	url = ../core.git
 [submodule "common"]
 	path = common
 	url = ../common.git

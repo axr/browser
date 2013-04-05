@@ -4,7 +4,10 @@ else()
     cmake_minimum_required(VERSION 2.8)
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_CURRENT_SOURCE_DIR}/src/core/cmake ${CMAKE_CURRENT_SOURCE_DIR}/src/core/cmake/solar ${CMAKE_MODULE_PATH})
+set(AXR_CORE_SOURCE_DIR_REL "../core" CACHE STRING "Path the AXR core sources (relative)")
+set(AXR_CORE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${AXR_CORE_SOURCE_DIR_REL})
+
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${AXR_CORE_SOURCE_DIR}/cmake ${AXR_CORE_SOURCE_DIR}/cmake/solar ${CMAKE_MODULE_PATH})
 include(ForceOutBuild)
 include(ForceLatinPaths)
 
@@ -31,7 +34,7 @@ include(Package)
 include(DeployQt4)
 
 # This list is for OS X application bundles to copy in all necessary icons
-file(GLOB axr_icon_SOURCES ${CMAKE_SOURCE_DIR}/src/core/share/icons/*.icns)
+file(GLOB axr_icon_SOURCES ${AXR_CORE_SOURCE_DIR}/share/icons/*.icns)
 
 # The HSS framework, to be copied into application bundles
 file(GLOB hss_SOURCES ${CMAKE_SOURCE_DIR}/share/hss-framework/*)
@@ -48,9 +51,9 @@ endif()
     # Treat all external dependency headers as system headers so we don't see warnings for them
     include_directories(SYSTEM ${SDL_INCLUDE_DIR} ${GTK2_INCLUDE_DIRS} ${QT_INCLUDES} ${CMAKE_SOURCE_DIR}/src/firebreath)
 
-    include_directories_recursive(${CMAKE_SOURCE_DIR}/src/core/src/core)
-    include_directories_recursive(${CMAKE_SOURCE_DIR}/src/core/src/qt)
-    include_directories_recursive(${CMAKE_SOURCE_DIR}/src/core/src/TEST)
+    include_directories_recursive(${AXR_CORE_SOURCE_DIR}/src/core)
+    include_directories_recursive(${AXR_CORE_SOURCE_DIR}/src/qt)
+    include_directories_recursive(${AXR_CORE_SOURCE_DIR}/src/TEST)
 
     if(AXR_ALL_WARNINGS)
         if(MSVC)
@@ -120,7 +123,7 @@ endif()
 
     configure_file("${CMAKE_SOURCE_DIR}/config.in.h" "${CMAKE_BINARY_DIR}/config.h")
 
-    add_subdirectory(src/core)
+    add_subdirectory("${AXR_CORE_SOURCE_DIR_REL}" "${CMAKE_BINARY_DIR}/_core")
     add_subdirectory(src/browser)
 
 if(UNIX)
