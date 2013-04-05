@@ -16,6 +16,12 @@ if(NOT EXISTS "${AXR_COMMON_SOURCE_DIR}" OR NOT IS_DIRECTORY "${AXR_COMMON_SOURC
     message(FATAL_ERROR "Could not find common module at expected path: ${AXR_COMMON_SOURCE_DIR}")
 endif()
 
+set(AXR_FRAMEWORK_SOURCE_DIR_REL "../framework" CACHE STRING "Path to the AXR HSS framework sources (relative)")
+set(AXR_FRAMEWORK_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${AXR_FRAMEWORK_SOURCE_DIR_REL})
+if(NOT EXISTS "${AXR_FRAMEWORK_SOURCE_DIR}" OR NOT IS_DIRECTORY "${AXR_FRAMEWORK_SOURCE_DIR}")
+    message(FATAL_ERROR "Could not find framework module at expected path: ${AXR_FRAMEWORK_SOURCE_DIR}")
+endif()
+
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${AXR_CORE_SOURCE_DIR}/cmake ${AXR_CORE_SOURCE_DIR}/cmake/solar ${CMAKE_MODULE_PATH})
 include(ForceOutBuild)
 include(ForceLatinPaths)
@@ -46,8 +52,8 @@ include(DeployQt4)
 file(GLOB axr_icon_SOURCES ${AXR_CORE_SOURCE_DIR}/share/icons/*.icns)
 
 # The HSS framework, to be copied into application bundles
-file(GLOB hss_SOURCES ${CMAKE_SOURCE_DIR}/share/hss-framework/*)
-list(REMOVE_ITEM hss_SOURCES ${CMAKE_SOURCE_DIR}/share/hss-framework/.git)
+file(GLOB hss_SOURCES ${AXR_FRAMEWORK_SOURCE_DIR}/*)
+list(REMOVE_ITEM hss_SOURCES ${AXR_FRAMEWORK_SOURCE_DIR}/.git)
 
 # If we're using an IDE build system such as Visual Studio or Xcode,
 # use fancier target names such as "Documentation" vs "docs"
