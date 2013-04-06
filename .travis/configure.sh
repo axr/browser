@@ -5,7 +5,7 @@ set -e
 git submodule update --init --recursive
 
 # Clone dependent repositories
-git clone https://github.com/axr/core.git ../core
+git clone --recursive https://github.com/axr/core.git ../core
 git clone https://github.com/axr/common.git ../common
 git clone https://github.com/axr/framework.git ../framework
 
