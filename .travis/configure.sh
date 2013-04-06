@@ -9,6 +9,9 @@ git clone https://github.com/axr/core.git ../core
 git clone https://github.com/axr/common.git ../common
 git clone https://github.com/axr/framework.git ../framework
 
+# Install dependencies
+../core/pre-configure.sh
+
 # Make build directories
 mkdir ../build
 
