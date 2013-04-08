@@ -41,64 +41,34 @@
  *
  ********************************************************************/
 
-#ifndef AXR_BROWSER_BROWSERWINDOW
-#define AXR_BROWSER_BROWSERWINDOW
+#ifndef AXR_BROWSER_BROWSERTAB
+#define AXR_BROWSER_BROWSERTAB
 
-#include <QMainWindow>
+#include "QAXRWidget.h"
 
-namespace Ui
-{
-    class BrowserWindow;
-}
-
-class BrowserTab;
+class BrowserTabPrivate;
 class QUrl;
 
-class BrowserWindow : public QMainWindow
+class BrowserTab : public AXR::QAXRWidget
 {
     Q_OBJECT
 
 public:
-    BrowserWindow(QWidget *parent = NULL);
-    virtual ~BrowserWindow();
+    BrowserTab(QWidget *parent = 0);
+    ~BrowserTab();
 
-public:
-    BrowserTab* currentTab() const;
-    QList<BrowserTab*> tabs() const;
+    QUrl currentUrl() const;
 
-protected:
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
-    bool event(QEvent *);
+signals:
+    void currentUrlChanged(const QUrl &url);
 
 public slots:
-    int newTab();
-    void openFile();
-    void openAddressBarUrl();
-    void openUrl(const QUrl &url, bool newTab = true);
-    void openUrls(const QList<QUrl> &urls, bool newTab = true);
-    void openFile(const QString &filePath, bool newTab = true);
-    void openFiles(const QStringList &filePaths, bool newTab = true);
-    void reloadFile();
-    void closeCurrentTab();
-    void closeTab(int index);
-
-    void previousLayoutStep();
-    void nextLayoutStep();
-
-    void showErrorLog();
-    void showPreferences();
-    void showAbout();
-
-    void toggleAntialiasing(bool on);
-
-private slots:
-    void updateUIForCurrentTabState();
+    void navigateToUrl(const QUrl &url);
+    void navigateToFilePath(const QString &filePath);
+    void reload();
 
 private:
-    class Private;
-    Private *d;
-    Ui::BrowserWindow *ui;
+    BrowserTabPrivate *const d;
 };
 
-#endif
+#endif // AXR_BROWSER_BROWSERTAB

@@ -20,6 +20,8 @@ set(browser_SOURCES
     BrowserApplication.h
     BrowserSettings.cpp
     BrowserSettings.h
+    BrowserTab.cpp
+    BrowserTab.h
     BrowserWindow.cpp
     BrowserWindow.h
     BrowserWindow.ui

@@ -48,6 +48,7 @@
 #include <QMimeData>
 #include <QPaintEvent>
 #include <QTextEdit>
+#include <QToolButton>
 #include <QUrl>
 
 #include "AXRController.h"
@@ -59,6 +60,7 @@
 #include "PreferencesDialog.h"
 #include "BrowserApplication.h"
 #include "BrowserSettings.h"
+#include "BrowserTab.h"
 #include "BrowserWindow.h"
 
 using namespace AXR;
@@ -69,20 +71,28 @@ class BrowserWindow::Private
 {
 public:
     Private()
-    : document(), addressBar(new QLineEdit)
+    : addressBar(new QLineEdit), reloadButton(new QToolButton(addressBar)),
+      reloadButtonSize(20), reloadButtonPadding(4)
     {
         addressBar->setAttribute(Qt::WA_MacShowFocusRect, false);
-        addressBar->setStyleSheet("QLineEdit { padding: 1 4 2 4; border: 1px solid #999; border-radius: 3px; }");
+        addressBar->setStyleSheet(QString("QLineEdit { padding: 1 %1 2 4; border: 1px solid #999; border-radius: 3px; }").arg(reloadButtonPadding + reloadButtonSize));
+
+        reloadButton->setFixedSize(reloadButtonSize, reloadButtonSize);
+        reloadButton->setCursor(Qt::ArrowCursor);
+        reloadButton->setStyleSheet("QToolButton { border: 0; }");
     }
 
-    ~Private()
+    void repositionReloadButton()
     {
-        if (document)
-            delete document;
+        const QSize addressBarSize = addressBar->size();
+        reloadButton->move(addressBarSize.width() - reloadButton->width() - reloadButtonPadding,
+                           (addressBarSize.height() - reloadButton->height()) / 2);
     }
 
-    AXRDocument *document;
     QLineEdit *addressBar;
+    QToolButton *reloadButton;
+    int reloadButtonSize;
+    int reloadButtonPadding;
 };
 
 BrowserWindow::BrowserWindow(QWidget *parent)
@@ -91,14 +101,10 @@ BrowserWindow::BrowserWindow(QWidget *parent)
     ui->setupUi(this);
 
     connect(d->addressBar, SIGNAL(returnPressed()), SLOT(openAddressBarUrl()));
-
-    ui->enableAntialiasingAction->setChecked(ui->renderingView->renderer()->isGlobalAntialiasingEnabled());
-
-    // The subview needs to accept drops as well even though the main window handles it
-    ui->renderingView->setAcceptDrops(true);
-
+    
     ui->openAction->setShortcuts(QKeySequence::Open);
     ui->reloadAction->setShortcuts(QKeySequence::Refresh);
+    d->reloadButton->setDefaultAction(ui->reloadAction);
     ui->closeAction->setShortcuts(QKeySequence::Close);
     ui->exitAction->setShortcuts(QKeySequence::Quit);
 
@@ -110,15 +116,25 @@ BrowserWindow::BrowserWindow(QWidget *parent)
     ui->logAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
 
     ui->navigationToolBar->addWidget(d->addressBar);
-
-    setWindowTitle(QCoreApplication::applicationName());
-    setWindowFilePath(QString());
 }
 
 BrowserWindow::~BrowserWindow()
 {
     delete ui;
     delete d;
+}
+
+BrowserTab* BrowserWindow::currentTab() const
+{
+    return dynamic_cast<BrowserTab*>(ui->tabWidget->currentWidget());
+}
+
+QList<BrowserTab*> BrowserWindow::tabs() const
+{
+    QList<BrowserTab*> tabList;
+    for (int i = 0; i < ui->tabWidget->count(); ++i)
+        tabList.append(dynamic_cast<BrowserTab*>(ui->tabWidget->widget(i)));
+    return tabList;
 }
 
 void BrowserWindow::dragEnterEvent(QDragEnterEvent *event)
@@ -158,6 +174,27 @@ void BrowserWindow::dropEvent(QDropEvent *event)
     }
 }
 
+bool BrowserWindow::event(QEvent *e)
+{
+    if (e->type() == QEvent::Show || e->type() == QEvent::Resize)
+        d->repositionReloadButton();
+
+    return QMainWindow::event(e);
+}
+
+int BrowserWindow::newTab()
+{
+    BrowserTab *tab = new BrowserTab;
+    int index = ui->tabWidget->addTab(tab, "Untitled");
+    connect(tab, SIGNAL(currentUrlChanged(QUrl)), SLOT(updateUIForCurrentTabState()));
+
+    // The subview needs to accept drops as well even though the main window handles it
+    tab->setAcceptDrops(true);
+
+    ui->tabWidget->setCurrentIndex(index);
+    return index;
+}
+
 void BrowserWindow::openFile()
 {
     QString file = QFileDialog::getOpenFileName(this, tr("Open XML/HSS File"), QString(), "AXR Files (*.xml *.hss)");
@@ -169,118 +206,88 @@ void BrowserWindow::openFile()
 
 void BrowserWindow::openAddressBarUrl()
 {
-    openUrl(QUrl(d->addressBar->text()));
+    openUrl(QUrl(d->addressBar->text()), false);
 }
 
-void BrowserWindow::openUrl(const QUrl &url)
+void BrowserWindow::openUrl(const QUrl &url, bool newTab)
 {
     if (!url.isLocalFile())
     {
         qDebug() << url.scheme() << "is not yet supported";
-        closeFile();
         return;
     }
 
-    // TODO: Don't use toLocalFile, it's broken but our usage here won't break anything important ATM
-    if (url.isLocalFile())
-    {
-        setWindowTitle(QString());
-        setWindowFilePath(url.toLocalFile());
-    }
-    else
-    {
-        setWindowTitle(url.toString());
-        setWindowFilePath(QString());
-    }
+    BrowserTab *tab = currentTab();
+    if (newTab)
+        tab = dynamic_cast<BrowserTab*>(ui->tabWidget->widget(this->newTab()));
 
-    // In a real browser this also gets set when the document finishes loading
-    d->addressBar->setText(url.toString());
-
-    // Delete document
-    if (d->document)
-    {
-        ui->renderingView->setDocument(0);
-        delete d->document;
-    }
-
-    ui->renderingView->setDocument(d->document = new AXRDocument);
-    d->document->loadFileByPath(url);
-
-    if (url.isLocalFile())
-    {
-        qApp->watchPath(url.toLocalFile());
-        qApp->settings()->setLastFileOpened(url.toLocalFile());
-    }
-
-    update();
+    if (tab)
+        tab->navigateToUrl(url);
 }
 
-void BrowserWindow::openUrls(const QList<QUrl> &urls)
+void BrowserWindow::openUrls(const QList<QUrl> &urls, bool newTab)
 {
     Q_FOREACH (const QUrl &url, urls)
-        openUrl(url);
+        openUrl(url, newTab);
 }
 
-void BrowserWindow::openFile(const QString &filePath)
+void BrowserWindow::openFile(const QString &filePath, bool newTab)
 {
-    openUrl(QUrl::fromLocalFile(filePath));
+    openUrl(QUrl::fromLocalFile(filePath), newTab);
 }
 
-void BrowserWindow::openFiles(const QStringList &filePaths)
+void BrowserWindow::openFiles(const QStringList &filePaths, bool newTab)
 {
-    // TODO: This actually needs to open new windows or tabs
     Q_FOREACH (QString path, filePaths)
-        openFile(path);
+        openFile(path, newTab);
 }
 
 void BrowserWindow::reloadFile()
 {
-    if (!d->document)
-        return;
-
-    d->document->reload();
-    qApp->unwatchPath(windowFilePath());
-    qApp->watchPath(windowFilePath());
-    update();
+    BrowserTab *tab = currentTab();
+    if (tab)
+        tab->reload();
 }
 
-void BrowserWindow::closeFile()
+void BrowserWindow::closeCurrentTab()
 {
-    if (!windowFilePath().isEmpty())
+    closeTab(ui->tabWidget->currentIndex());
+}
+
+void BrowserWindow::closeTab(int index)
+{
+    BrowserTab *tab = dynamic_cast<BrowserTab*>(ui->tabWidget->widget(index));
+    ui->tabWidget->removeTab(index);
+
+    if (tab)
+    {
         // TODO: when we have multiple windows, we should only stop
         // watching the path if no other windows have this file open
-        qApp->unwatchPath(windowFilePath());
-
-    setWindowTitle(QCoreApplication::applicationName());
-    setWindowFilePath(QString());
-    d->addressBar->clear();
-
-    // Remove the document from the renderer and delete it
-    if (d->document)
-    {
-        ui->renderingView->setDocument(0);
-        delete d->document;
-        d->document = 0;
+        qApp->unwatchPath(tab->currentUrl().toLocalFile());
     }
+
+    delete tab;
 }
 
 void BrowserWindow::previousLayoutStep()
 {
-    if (!d->document)
+    AXRDocument *document = currentTab() ? currentTab()->document() : 0;
+    if (!document)
         return;
 
-    d->document->setShowLayoutSteps(true);
-    d->document->previousLayoutStep();
+    document->setShowLayoutSteps(true);
+    document->previousLayoutStep();
     update();
 }
 
 void BrowserWindow::nextLayoutStep()
 {
-    if (!d->document)
+    AXRDocument *document = currentTab() ? currentTab()->document() : 0;
+    if (!document)
         return;
 
-    d->document->setShowLayoutSteps(true);
-    d->document->nextLayoutStep();
+    document->setShowLayoutSteps(true);
+    document->nextLayoutStep();
     update();
 }
 
@@ -301,6 +308,29 @@ void BrowserWindow::showAbout()
 
 void BrowserWindow::toggleAntialiasing(bool on)
 {
-    ui->renderingView->renderer()->setGlobalAntialiasingEnabled(on);
+    Q_FOREACH (BrowserTab *tab, tabs())
+        tab->renderer()->setGlobalAntialiasingEnabled(on);
+
     update();
+}
+
+void BrowserWindow::updateUIForCurrentTabState()
+{
+    BrowserTab *tab = currentTab();
+    if (tab)
+    {
+        if (!tab->currentUrl().isEmpty())
+            ui->tabWidget->setTabText(ui->tabWidget->currentIndex(), QFileInfo(tab->currentUrl().path()).fileName());
+        else
+            ui->tabWidget->setTabText(ui->tabWidget->currentIndex(), "Untitled");
+
+        d->addressBar->setText(tab->currentUrl().toString());
+        ui->tabWidget->setVisible(true);
+        ui->enableAntialiasingAction->setChecked(tab->renderer()->isGlobalAntialiasingEnabled());
+    }
+    else
+    {
+        ui->tabWidget->setVisible(false);
+        d->addressBar->clear();
+    }
 }

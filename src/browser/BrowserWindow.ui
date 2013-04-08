@@ -25,7 +25,17 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QAXRWidget" name="renderingView" native="true"/>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="documentMode">
+       <bool>true</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -42,6 +52,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="newTabAction"/>
     <addaction name="openAction"/>
     <addaction name="reloadAction"/>
     <addaction name="separator"/>
@@ -111,7 +122,6 @@
    </attribute>
    <addaction name="backAction"/>
    <addaction name="forwardAction"/>
-   <addaction name="reloadAction"/>
   </widget>
   <action name="openAction">
    <property name="text">
@@ -119,13 +129,17 @@
    </property>
   </action>
   <action name="reloadAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/icons/browser-ui-refresh.png</normaloff>:/icons/browser-ui-refresh.png</iconset>
+   </property>
    <property name="text">
     <string>Reload</string>
    </property>
   </action>
   <action name="closeAction">
    <property name="text">
-    <string>Close</string>
+    <string>Close Tab</string>
    </property>
   </action>
   <action name="exitAction">
@@ -193,15 +207,15 @@
     <string>Forward</string>
    </property>
   </action>
+  <action name="newTabAction">
+   <property name="text">
+    <string>New Tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QAXRWidget</class>
-   <extends>QWidget</extends>
-   <header>QAXRWidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="Resources.qrc"/>
  </resources>
@@ -242,7 +256,7 @@
    <sender>closeAction</sender>
    <signal>triggered()</signal>
    <receiver>BrowserWindow</receiver>
-   <slot>closeFile()</slot>
+   <slot>closeCurrentTab()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -366,10 +380,57 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tabWidget</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>BrowserWindow</receiver>
+   <slot>updateUIForCurrentTabState()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>599</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>599</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tabWidget</sender>
+   <signal>tabCloseRequested(int)</signal>
+   <receiver>BrowserWindow</receiver>
+   <slot>closeTab(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>599</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>599</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>newTabAction</sender>
+   <signal>triggered()</signal>
+   <receiver>BrowserWindow</receiver>
+   <slot>newTab()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>599</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>openFile()</slot>
-  <slot>closeFile()</slot>
   <slot>reloadFile()</slot>
   <slot>previousLayoutStep()</slot>
   <slot>nextLayoutStep()</slot>
@@ -377,5 +438,9 @@
   <slot>showAbout()</slot>
   <slot>toggleAntialiasing(bool)</slot>
   <slot>showPreferences()</slot>
+  <slot>updateUIForCurrentTabState()</slot>
+  <slot>closeTab(int)</slot>
+  <slot>closeCurrentTab()</slot>
+  <slot>newTab()</slot>
  </slots>
 </ui>
