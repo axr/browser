@@ -51,6 +51,8 @@ namespace Ui
     class BrowserWindow;
 }
 
+class QUrl;
+
 class BrowserWindow : public QMainWindow
 {
     Q_OBJECT
@@ -66,6 +68,8 @@ protected:
 public slots:
     void openFile();
     void openAddressBarUrl();
+    void openUrl(const QUrl &url);
+    void openUrls(const QList<QUrl> &urls);
     void openFile(const QString &filePath);
     void openFiles(const QStringList &filePaths);
     void reloadFile();

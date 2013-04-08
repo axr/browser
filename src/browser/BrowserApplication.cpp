@@ -176,10 +176,7 @@ bool BrowserApplication::event(QEvent *e)
     {
         case QEvent::FileOpen:
         {
-            const QUrl url = static_cast<QFileOpenEvent*>(e)->url();
-            if (url.isLocalFile())
-                d->mainWindow->openFile(url.path());
-
+            d->mainWindow->openUrl(static_cast<QFileOpenEvent*>(e)->url());
             return true;
         }
         default:

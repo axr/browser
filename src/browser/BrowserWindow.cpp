@@ -129,7 +129,7 @@ void BrowserWindow::dragEnterEvent(QDragEnterEvent *event)
         QList<QUrl> urlList = mimeData->urls();
         Q_FOREACH (QUrl url, urlList)
         {
-            QFileInfo fi(url.toLocalFile());
+            QFileInfo fi(url.path());
             if (fi.exists() && (fi.suffix() == "xml" || fi.suffix() == "hss"))
             {
                 event->setDropAction(Qt::CopyAction);
@@ -149,16 +149,8 @@ void BrowserWindow::dropEvent(QDropEvent *event)
     const QMimeData *mimeData = event->mimeData();
     if (mimeData->hasUrls())
     {
-        QList<QUrl> urlList = mimeData->urls();
-        QStringList pathList;
-
-        Q_FOREACH (QUrl url, urlList)
-        {
-            pathList += url.toLocalFile();
-        }
-
         event->accept();
-        this->openFiles(pathList);
+        this->openUrls(mimeData->urls());
     }
     else
     {
@@ -177,21 +169,32 @@ void BrowserWindow::openFile()
 
 void BrowserWindow::openAddressBarUrl()
 {
-    const QUrl url = QUrl(d->addressBar->text());
-    if (url.isLocalFile())
-        openFile(url.path());
-    else
+    openUrl(QUrl(d->addressBar->text()));
+}
+
+void BrowserWindow::openUrl(const QUrl &url)
+{
+    if (!url.isLocalFile())
     {
         qDebug() << url.scheme() << "is not yet supported";
         closeFile();
+        return;
     }
-}
 
-void BrowserWindow::openFile(const QString &filePath)
-{
-    setWindowTitle(filePath.isEmpty() ? QCoreApplication::applicationName() : QString());
-    setWindowFilePath(filePath);
-    d->addressBar->setText(QUrl::fromLocalFile(filePath).toString());
+    // TODO: Don't use toLocalFile, it's broken but our usage here won't break anything important ATM
+    if (url.isLocalFile())
+    {
+        setWindowTitle(QString());
+        setWindowFilePath(url.toLocalFile());
+    }
+    else
+    {
+        setWindowTitle(url.toString());
+        setWindowFilePath(QString());
+    }
+
+    // In a real browser this also gets set when the document finishes loading
+    d->addressBar->setText(url.toString());
 
     // Delete document
     if (d->document)
@@ -201,19 +204,33 @@ void BrowserWindow::openFile(const QString &filePath)
     }
 
     ui->renderingView->setDocument(d->document = new AXRDocument);
-    d->document->loadFileByPath(QUrl::fromLocalFile(filePath));
-    qApp->watchPath(filePath);
-    qApp->settings()->setLastFileOpened(filePath);
+    d->document->loadFileByPath(url);
+
+    if (url.isLocalFile())
+    {
+        qApp->watchPath(url.toLocalFile());
+        qApp->settings()->setLastFileOpened(url.toLocalFile());
+    }
+
     update();
+}
+
+void BrowserWindow::openUrls(const QList<QUrl> &urls)
+{
+    Q_FOREACH (const QUrl &url, urls)
+        openUrl(url);
+}
+
+void BrowserWindow::openFile(const QString &filePath)
+{
+    openUrl(QUrl::fromLocalFile(filePath));
 }
 
 void BrowserWindow::openFiles(const QStringList &filePaths)
 {
     // TODO: This actually needs to open new windows or tabs
     Q_FOREACH (QString path, filePaths)
-    {
         openFile(path);
-    }
 }
 
 void BrowserWindow::reloadFile()
