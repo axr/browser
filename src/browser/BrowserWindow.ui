@@ -94,6 +94,12 @@
    <property name="movable">
     <bool>false</bool>
    </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
    <property name="floatable">
     <bool>false</bool>
    </property>
@@ -170,11 +176,19 @@
    </property>
   </action>
   <action name="backAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/icons/browser-ui-back.png</normaloff>:/icons/browser-ui-back.png</iconset>
+   </property>
    <property name="text">
     <string>Back</string>
    </property>
   </action>
   <action name="forwardAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/icons/browser-ui-forward.png</normaloff>:/icons/browser-ui-forward.png</iconset>
+   </property>
    <property name="text">
     <string>Forward</string>
    </property>
@@ -188,7 +202,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>openAction</sender>
