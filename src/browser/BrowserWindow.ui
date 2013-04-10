@@ -190,18 +190,26 @@
    </property>
   </action>
   <action name="backAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Resources.qrc">
-     <normaloff>:/icons/browser-ui-back.png</normaloff>:/icons/browser-ui-back.png</iconset>
+     <normaloff>:/icons/browser-ui-back.png</normaloff>
+     <disabledoff>:/icons/browser-ui-back-disabled.png</disabledoff>:/icons/browser-ui-back.png</iconset>
    </property>
    <property name="text">
     <string>Back</string>
    </property>
   </action>
   <action name="forwardAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Resources.qrc">
-     <normaloff>:/icons/browser-ui-forward.png</normaloff>:/icons/browser-ui-forward.png</iconset>
+     <normaloff>:/icons/browser-ui-forward.png</normaloff>
+     <disabledoff>:/icons/browser-ui-forward-disabled.png</disabledoff>:/icons/browser-ui-forward.png</iconset>
    </property>
    <property name="text">
     <string>Forward</string>

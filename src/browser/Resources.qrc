@@ -1,7 +1,10 @@
 <RCC>
   <qresource prefix="/icons">
-    <file>browser-ui-forward.png</file>
     <file>browser-ui-back.png</file>
+    <file>browser-ui-back-disabled.png</file>
+    <file>browser-ui-back.png</file>
+    <file>browser-ui-forward-disabled.png</file>
+    <file>browser-ui-forward.png</file>
     <file>browser-ui-refresh.png</file>
     <file>General.png</file>
     <file>Debug.png</file>
