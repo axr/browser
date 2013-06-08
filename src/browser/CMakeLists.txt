@@ -33,30 +33,12 @@ set(browser_SOURCES
     ${hss_SOURCES}
 )
 
-if(APPLE)
-    list(APPEND browser_SOURCES
-        ../3rdparty/qtmacextras/src/qtmactoolbardelegate.mm
-        ../3rdparty/qtmacextras/src/qtmactoolbardelegate.h
-        ../3rdparty/qtmacextras/src/qtmactoolbutton.mm
-        ../3rdparty/qtmacextras/src/qtmactoolbutton.h
-        ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.mm
-        ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.h
-        ../3rdparty/qtmacextras/src/qtnstoolbar.mm
-        ../3rdparty/qtmacextras/src/qtnstoolbar.h
-    )
-
-    find_library(COCOA_LIBRARY Cocoa REQUIRED)
-    mark_as_advanced(COCOA_LIBRARY)
-else()
-    list(APPEND browser_SOURCES ../3rdparty/qtmacextras/src/qtmacunifiedtoolbar.cpp)
-endif()
-
 source_group("Resources\\HSS Framework" FILES ${hss_SOURCES})
 
 qt_transform_sources(browser_SOURCES "${browser_SOURCES}")
 
 add_executable(${TARGET_NAME_APP_BROWSER} WIN32 MACOSX_BUNDLE ${browser_SOURCES})
-target_link_libraries(${TARGET_NAME_APP_BROWSER} ${TARGET_NAME_LIB_CORE} "${TARGET_NAME_LIB_QT}" ${QT_QTMAIN_LIBRARY} ${COCOA_LIBRARY})
+target_link_libraries(${TARGET_NAME_APP_BROWSER} ${TARGET_NAME_LIB_CORE} ${QT_QTMACEXTRAS_LIBRARY} "${TARGET_NAME_LIB_QT}" ${QT_QTMAIN_LIBRARY} ${COCOA_LIBRARY})
 
 set(MACOSX_BUNDLE_ICON_FILE prototype.icns)
 
