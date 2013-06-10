@@ -47,6 +47,7 @@
 #include "BrowserTab.h"
 
 #include <QDebug>
+#include <QPainter>
 #include <QTimer>
 #include <QUrl>
 
@@ -125,4 +126,18 @@ void BrowserTab::reload()
     }
 
     update();
+}
+
+void BrowserTab::paintEvent(QPaintEvent *e)
+{
+    if (!document() || !document()->isFileLoaded())
+    {
+        QPainter painter(this);
+        painter.setFont(QFont("Helvetica Light", 36));
+        painter.fillRect(rect(), Qt::white);
+        painter.drawText(0, 0, width(), height(), Qt::AlignCenter, "No document loaded");
+        return;
+    }
+
+    QAXRWidget::paintEvent(e);
 }

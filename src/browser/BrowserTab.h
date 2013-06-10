@@ -67,6 +67,9 @@ public slots:
     void navigateToFilePath(const QString &filePath);
     void reload();
 
+protected:
+    void paintEvent(QPaintEvent *e);
+
 private:
     BrowserTabPrivate *const d;
 };
