@@ -1,8 +1,8 @@
-import qbs.base 1.0
+import qbs 1.0
 
 Project {
     references: [
-        "src/core/axrcore.qbs",
+        "../core/axrcore.qbs",
         "src/browser/browser.qbs"
     ]
 
@@ -57,7 +57,7 @@ Project {
             }
         }
 
-        ProductModule {
+        Export {
             Depends { name: "cpp" }
             cpp.includePaths: product.buildDirectory
         }
