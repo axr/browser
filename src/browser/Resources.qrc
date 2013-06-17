@@ -1,6 +1,5 @@
 <RCC>
   <qresource prefix="/icons">
-    <file>browser-ui-back.png</file>
     <file>browser-ui-back-disabled.png</file>
     <file>browser-ui-back.png</file>
     <file>browser-ui-forward-disabled.png</file>
