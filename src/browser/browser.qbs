@@ -2,7 +2,7 @@ import qbs 1.0
 
 Application {
     name: "axrbrowser"
-    targetName: qbs.targetOS === "osx" ? "AXR Browser" : name
+    targetName: qbs.targetOS.contains("osx") ? "AXR Browser" : name
 
     Depends { name: "cpp" }
     Depends { name: "axrcore" }
