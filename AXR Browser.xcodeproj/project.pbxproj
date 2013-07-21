@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14367C7A179C497D00764852 /* browser-ui-back-disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 14367C60179C497D00764852 /* browser-ui-back-disabled.png */; };
+		14367C7B179C497D00764852 /* browser-ui-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 14367C61179C497D00764852 /* browser-ui-back.png */; };
+		14367C7C179C497D00764852 /* browser-ui-forward-disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 14367C62179C497D00764852 /* browser-ui-forward-disabled.png */; };
+		14367C7D179C497D00764852 /* browser-ui-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 14367C63179C497D00764852 /* browser-ui-forward.png */; };
+		14367C7E179C497D00764852 /* browser-ui-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 14367C64179C497D00764852 /* browser-ui-refresh.png */; };
+		14367C84179C497D00764852 /* Debug.png in Resources */ = {isa = PBXBuildFile; fileRef = 14367C6E179C497D00764852 /* Debug.png */; };
+		14367C85179C497D00764852 /* General.png in Resources */ = {isa = PBXBuildFile; fileRef = 14367C6F179C497D00764852 /* General.png */; };
+		14367C93179C4AC100764852 /* AXRCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14367C90179C4AB400764852 /* AXRCore.framework */; };
+		14367C96179C4D1300764852 /* AXRCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 14367C90179C4AB400764852 /* AXRCore.framework */; };
+		14367D8D179C529F00764852 /* AboutDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14367C5D179C497D00764852 /* AboutDialog.cpp */; };
+		14367D8E179C529F00764852 /* AboutDialog.h in Sources */ = {isa = PBXBuildFile; fileRef = 14367C5E179C497D00764852 /* AboutDialog.h */; };
+		14367D8F179C529F00764852 /* AboutDialog.ui in Sources */ = {isa = PBXBuildFile; fileRef = 14367C5F179C497D00764852 /* AboutDialog.ui */; };
+		14367D90179C529F00764852 /* BrowserApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14367C65179C497D00764852 /* BrowserApplication.cpp */; };
+		14367D91179C529F00764852 /* BrowserApplication.h in Sources */ = {isa = PBXBuildFile; fileRef = 14367C66179C497D00764852 /* BrowserApplication.h */; };
+		14367D92179C529F00764852 /* BrowserSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14367C67179C497D00764852 /* BrowserSettings.cpp */; };
+		14367D94179C529F00764852 /* BrowserTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14367C69179C497D00764852 /* BrowserTab.cpp */; };
+		14367D95179C529F00764852 /* BrowserTab.h in Sources */ = {isa = PBXBuildFile; fileRef = 14367C6A179C497D00764852 /* BrowserTab.h */; };
+		14367D96179C529F00764852 /* BrowserWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14367C6B179C497D00764852 /* BrowserWindow.cpp */; };
+		14367D97179C529F00764852 /* BrowserWindow.h in Sources */ = {isa = PBXBuildFile; fileRef = 14367C6C179C497D00764852 /* BrowserWindow.h */; };
+		14367D98179C529F00764852 /* BrowserWindow.ui in Sources */ = {isa = PBXBuildFile; fileRef = 14367C6D179C497D00764852 /* BrowserWindow.ui */; };
+		14367D99179C529F00764852 /* LogWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14367C70179C497D00764852 /* LogWindow.cpp */; };
+		14367D9A179C529F00764852 /* LogWindow.h in Sources */ = {isa = PBXBuildFile; fileRef = 14367C71179C497D00764852 /* LogWindow.h */; };
+		14367D9B179C529F00764852 /* LogWindow.ui in Sources */ = {isa = PBXBuildFile; fileRef = 14367C72179C497D00764852 /* LogWindow.ui */; };
+		14367D9C179C529F00764852 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14367C73179C497D00764852 /* main.cpp */; };
+		14367D9D179C529F00764852 /* PreferencesDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14367C74179C497D00764852 /* PreferencesDialog.cpp */; };
+		14367D9E179C529F00764852 /* PreferencesDialog.h in Sources */ = {isa = PBXBuildFile; fileRef = 14367C75179C497D00764852 /* PreferencesDialog.h */; };
+		14367D9F179C529F00764852 /* PreferencesDialog.ui in Sources */ = {isa = PBXBuildFile; fileRef = 14367C76179C497D00764852 /* PreferencesDialog.ui */; };
+		14367DA0179C529F00764852 /* Resources.qrc in Sources */ = {isa = PBXBuildFile; fileRef = 14367C77179C497D00764852 /* Resources.qrc */; };
+		149BA726179C7C4200302104 /* axrqthelper.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 149BA6E2179C789F00302104 /* axrqthelper.dylib */; };
+		14B04E11179C3EED00AF6FDE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14B04E0F179C3EED00AF6FDE /* InfoPlist.strings */; };
+		14B04E17179C3EED00AF6FDE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 14B04E15179C3EED00AF6FDE /* Credits.rtf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		14367DA4179C67FB00764852 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.h";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"moc_${INPUT_FILE_BASE}.cpp",
+			);
+			script = "\"$PROJECT_FILE_PATH/rules/moc\"";
+		};
+		14367DA5179C68E000764852 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.ui";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"ui_${INPUT_FILE_BASE}.h",
+			);
+			script = "\"$PROJECT_FILE_PATH/rules/uic\"";
+		};
+		149BA729179C7D4600302104 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.qrc";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"qrc_${INPUT_FILE_BASE}.cpp",
+			);
+			script = "\"$PROJECT_FILE_PATH/rules/rcc\"";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		14367C8F179C4AB400764852 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14B05036179C471500AF6FDE /* AXR SDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 14B04E44179C3F5C00AF6FDE;
+			remoteInfo = "AXR Core";
+		};
+		14367C91179C4ABB00764852 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14B05036179C471500AF6FDE /* AXR SDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 14B04E43179C3F5C00AF6FDE;
+			remoteInfo = "AXR Core";
+		};
+		149BA6E1179C789F00302104 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14B05036179C471500AF6FDE /* AXR SDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 149BA6A2179C787500302104;
+			remoteInfo = "Qt Helper Library";
+		};
+		149BA70E179C791A00302104 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14B05036179C471500AF6FDE /* AXR SDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 149BA6ED179C78E400302104;
+			remoteInfo = "Cocoa Helper Library";
+		};
+		149BA727179C7C5200302104 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14B05036179C471500AF6FDE /* AXR SDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149BA6A1179C787500302104;
+			remoteInfo = "Qt Helper Library";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		14367C95179C4D0500764852 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				14367C96179C4D1300764852 /* AXRCore.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		14367C5D179C497D00764852 /* AboutDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AboutDialog.cpp; sourceTree = "<group>"; };
+		14367C5E179C497D00764852 /* AboutDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDialog.h; sourceTree = "<group>"; };
+		14367C5F179C497D00764852 /* AboutDialog.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AboutDialog.ui; sourceTree = "<group>"; };
+		14367C60179C497D00764852 /* browser-ui-back-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browser-ui-back-disabled.png"; sourceTree = "<group>"; };
+		14367C61179C497D00764852 /* browser-ui-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browser-ui-back.png"; sourceTree = "<group>"; };
+		14367C62179C497D00764852 /* browser-ui-forward-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browser-ui-forward-disabled.png"; sourceTree = "<group>"; };
+		14367C63179C497D00764852 /* browser-ui-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browser-ui-forward.png"; sourceTree = "<group>"; };
+		14367C64179C497D00764852 /* browser-ui-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browser-ui-refresh.png"; sourceTree = "<group>"; };
+		14367C65179C497D00764852 /* BrowserApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrowserApplication.cpp; sourceTree = "<group>"; };
+		14367C66179C497D00764852 /* BrowserApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserApplication.h; sourceTree = "<group>"; };
+		14367C67179C497D00764852 /* BrowserSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrowserSettings.cpp; sourceTree = "<group>"; };
+		14367C68179C497D00764852 /* BrowserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserSettings.h; sourceTree = "<group>"; };
+		14367C69179C497D00764852 /* BrowserTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrowserTab.cpp; sourceTree = "<group>"; };
+		14367C6A179C497D00764852 /* BrowserTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserTab.h; sourceTree = "<group>"; };
+		14367C6B179C497D00764852 /* BrowserWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrowserWindow.cpp; sourceTree = "<group>"; };
+		14367C6C179C497D00764852 /* BrowserWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserWindow.h; sourceTree = "<group>"; };
+		14367C6D179C497D00764852 /* BrowserWindow.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BrowserWindow.ui; sourceTree = "<group>"; };
+		14367C6E179C497D00764852 /* Debug.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Debug.png; sourceTree = "<group>"; };
+		14367C6F179C497D00764852 /* General.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = General.png; sourceTree = "<group>"; };
+		14367C70179C497D00764852 /* LogWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogWindow.cpp; sourceTree = "<group>"; };
+		14367C71179C497D00764852 /* LogWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogWindow.h; sourceTree = "<group>"; };
+		14367C72179C497D00764852 /* LogWindow.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LogWindow.ui; sourceTree = "<group>"; };
+		14367C73179C497D00764852 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		14367C74179C497D00764852 /* PreferencesDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PreferencesDialog.cpp; sourceTree = "<group>"; };
+		14367C75179C497D00764852 /* PreferencesDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesDialog.h; sourceTree = "<group>"; };
+		14367C76179C497D00764852 /* PreferencesDialog.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PreferencesDialog.ui; sourceTree = "<group>"; };
+		14367C77179C497D00764852 /* Resources.qrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Resources.qrc; sourceTree = "<group>"; };
+		14367DA6179C699F00764852 /* AXRBrowser.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AXRBrowser.xcconfig; path = "AXR Browser.xcodeproj/config/AXRBrowser.xcconfig"; sourceTree = SOURCE_ROOT; };
+		149BA72E179C8C7C00302104 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Shared.xcconfig; path = "../../../core/AXR SDK.xcodeproj/config/Shared.xcconfig"; sourceTree = "<group>"; };
+		149BA72F179C8C7C00302104 /* SharedDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SharedDebug.xcconfig; path = "../../../core/AXR SDK.xcodeproj/config/SharedDebug.xcconfig"; sourceTree = "<group>"; };
+		149BA730179C8C7C00302104 /* SharedRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SharedRelease.xcconfig; path = "../../../core/AXR SDK.xcodeproj/config/SharedRelease.xcconfig"; sourceTree = "<group>"; };
+		149BA732179C8D0F00302104 /* SharedWarnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SharedWarnings.xcconfig; path = "../../../core/AXR SDK.xcodeproj/config/SharedWarnings.xcconfig"; sourceTree = "<group>"; };
+		149BA733179C91CF00302104 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14B04E03179C3EEC00AF6FDE /* AXR Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AXR Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14B04E06179C3EED00AF6FDE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		14B04E09179C3EED00AF6FDE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		14B04E0A179C3EED00AF6FDE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		14B04E0B179C3EED00AF6FDE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		14B04E10179C3EED00AF6FDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		14B04E16179C3EED00AF6FDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		14B04E25179C3EED00AF6FDE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		14B05036179C471500AF6FDE /* AXR SDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AXR SDK.xcodeproj"; path = "../core/AXR SDK.xcodeproj"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		14B04E00179C3EEC00AF6FDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14367C93179C4AC100764852 /* AXRCore.framework in Frameworks */,
+				149BA726179C7C4200302104 /* axrqthelper.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14367C8C179C4AB400764852 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14367C90179C4AB400764852 /* AXRCore.framework */,
+				149BA6E2179C789F00302104 /* axrqthelper.dylib */,
+				149BA70F179C791A00302104 /* axrcocoahelper.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14B04DFA179C3EEC00AF6FDE = {
+			isa = PBXGroup;
+			children = (
+				14B04E0C179C3EED00AF6FDE /* AXR Browser */,
+				14B0503C179C474F00AF6FDE /* AXR SDK */,
+				14B04E05179C3EEC00AF6FDE /* Frameworks */,
+				14B04E04179C3EEC00AF6FDE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		14B04E04179C3EEC00AF6FDE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14B04E03179C3EEC00AF6FDE /* AXR Browser.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14B04E05179C3EEC00AF6FDE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14B04E06179C3EED00AF6FDE /* Cocoa.framework */,
+				14B04E25179C3EED00AF6FDE /* XCTest.framework */,
+				14B04E08179C3EED00AF6FDE /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14B04E08179C3EED00AF6FDE /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14B04E09179C3EED00AF6FDE /* AppKit.framework */,
+				14B04E0A179C3EED00AF6FDE /* CoreData.framework */,
+				14B04E0B179C3EED00AF6FDE /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		14B04E0C179C3EED00AF6FDE /* AXR Browser */ = {
+			isa = PBXGroup;
+			children = (
+				14367C5D179C497D00764852 /* AboutDialog.cpp */,
+				14367C5E179C497D00764852 /* AboutDialog.h */,
+				14367C5F179C497D00764852 /* AboutDialog.ui */,
+				14367C65179C497D00764852 /* BrowserApplication.cpp */,
+				14367C66179C497D00764852 /* BrowserApplication.h */,
+				14367C67179C497D00764852 /* BrowserSettings.cpp */,
+				14367C68179C497D00764852 /* BrowserSettings.h */,
+				14367C69179C497D00764852 /* BrowserTab.cpp */,
+				14367C6A179C497D00764852 /* BrowserTab.h */,
+				14367C6B179C497D00764852 /* BrowserWindow.cpp */,
+				14367C6C179C497D00764852 /* BrowserWindow.h */,
+				14367C6D179C497D00764852 /* BrowserWindow.ui */,
+				14367C70179C497D00764852 /* LogWindow.cpp */,
+				14367C71179C497D00764852 /* LogWindow.h */,
+				14367C72179C497D00764852 /* LogWindow.ui */,
+				14367C73179C497D00764852 /* main.cpp */,
+				14367C74179C497D00764852 /* PreferencesDialog.cpp */,
+				14367C75179C497D00764852 /* PreferencesDialog.h */,
+				14367C76179C497D00764852 /* PreferencesDialog.ui */,
+				14367C77179C497D00764852 /* Resources.qrc */,
+				14B04E0D179C3EED00AF6FDE /* Supporting Files */,
+			);
+			name = "AXR Browser";
+			path = src/browser;
+			sourceTree = "<group>";
+		};
+		14B04E0D179C3EED00AF6FDE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14367DA6179C699F00764852 /* AXRBrowser.xcconfig */,
+				149BA72E179C8C7C00302104 /* Shared.xcconfig */,
+				149BA72F179C8C7C00302104 /* SharedDebug.xcconfig */,
+				149BA730179C8C7C00302104 /* SharedRelease.xcconfig */,
+				149BA732179C8D0F00302104 /* SharedWarnings.xcconfig */,
+				14367C60179C497D00764852 /* browser-ui-back-disabled.png */,
+				14367C61179C497D00764852 /* browser-ui-back.png */,
+				14367C62179C497D00764852 /* browser-ui-forward-disabled.png */,
+				14367C63179C497D00764852 /* browser-ui-forward.png */,
+				14367C64179C497D00764852 /* browser-ui-refresh.png */,
+				14367C6E179C497D00764852 /* Debug.png */,
+				14367C6F179C497D00764852 /* General.png */,
+				149BA733179C91CF00302104 /* Info.plist */,
+				14B04E0F179C3EED00AF6FDE /* InfoPlist.strings */,
+				14B04E15179C3EED00AF6FDE /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14B0503C179C474F00AF6FDE /* AXR SDK */ = {
+			isa = PBXGroup;
+			children = (
+				14B05036179C471500AF6FDE /* AXR SDK.xcodeproj */,
+			);
+			name = "AXR SDK";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		14B04E02179C3EEC00AF6FDE /* AXR Browser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14B04E34179C3EED00AF6FDE /* Build configuration list for PBXNativeTarget "AXR Browser" */;
+			buildPhases = (
+				14367DA7179C6A6D00764852 /* ShellScript */,
+				14B04DFF179C3EEC00AF6FDE /* Sources */,
+				14B04E00179C3EEC00AF6FDE /* Frameworks */,
+				14B04E01179C3EEC00AF6FDE /* Resources */,
+				14367C95179C4D0500764852 /* CopyFiles */,
+			);
+			buildRules = (
+				14367DA4179C67FB00764852 /* PBXBuildRule */,
+				149BA729179C7D4600302104 /* PBXBuildRule */,
+				14367DA5179C68E000764852 /* PBXBuildRule */,
+			);
+			dependencies = (
+				14367C92179C4ABB00764852 /* PBXTargetDependency */,
+				149BA728179C7C5200302104 /* PBXTargetDependency */,
+			);
+			name = "AXR Browser";
+			productName = "AXR Browser";
+			productReference = 14B04E03179C3EEC00AF6FDE /* AXR Browser.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		14B04DFB179C3EEC00AF6FDE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "AXR Project";
+			};
+			buildConfigurationList = 14B04DFE179C3EEC00AF6FDE /* Build configuration list for PBXProject "AXR Browser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 14B04DFA179C3EEC00AF6FDE;
+			productRefGroup = 14B04E04179C3EEC00AF6FDE /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 14367C8C179C4AB400764852 /* Products */;
+					ProjectRef = 14B05036179C471500AF6FDE /* AXR SDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				14B04E02179C3EEC00AF6FDE /* AXR Browser */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		14367C90179C4AB400764852 /* AXRCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AXRCore.framework;
+			remoteRef = 14367C8F179C4AB400764852 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		149BA6E2179C789F00302104 /* axrqthelper.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = axrqthelper.dylib;
+			remoteRef = 149BA6E1179C789F00302104 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		149BA70F179C791A00302104 /* axrcocoahelper.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = axrcocoahelper.dylib;
+			remoteRef = 149BA70E179C791A00302104 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		14B04E01179C3EEC00AF6FDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14367C85179C497D00764852 /* General.png in Resources */,
+				14B04E11179C3EED00AF6FDE /* InfoPlist.strings in Resources */,
+				14367C7B179C497D00764852 /* browser-ui-back.png in Resources */,
+				14367C7A179C497D00764852 /* browser-ui-back-disabled.png in Resources */,
+				14367C84179C497D00764852 /* Debug.png in Resources */,
+				14B04E17179C3EED00AF6FDE /* Credits.rtf in Resources */,
+				14367C7E179C497D00764852 /* browser-ui-refresh.png in Resources */,
+				14367C7D179C497D00764852 /* browser-ui-forward.png in Resources */,
+				14367C7C179C497D00764852 /* browser-ui-forward-disabled.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14367DA7179C6A6D00764852 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp \"$PROJECT_DIR/config.in.h\" \"$DERIVED_SOURCES_DIR/config.h\"\nsed -i '' \"s/@BROWSER_VERSION_MAJOR@/$BROWSER_VERSION_MAJOR/g\" \"$DERIVED_SOURCES_DIR/config.h\"\nsed -i '' \"s/@BROWSER_VERSION_MINOR@/$BROWSER_VERSION_MINOR/g\" \"$DERIVED_SOURCES_DIR/config.h\"\nsed -i '' \"s/@BROWSER_VERSION_PATCH@/$BROWSER_VERSION_PATCH/g\" \"$DERIVED_SOURCES_DIR/config.h\"\nsed -i '' \"s/@BROWSER_VERSION_BUILD@/$BROWSER_VERSION_BUILD/g\" \"$DERIVED_SOURCES_DIR/config.h\"\nsed -i '' \"s/@BROWSER_VERSION_STRING@/$BROWSER_VERSION_STRING/g\" \"$DERIVED_SOURCES_DIR/config.h\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14B04DFF179C3EEC00AF6FDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14367D8D179C529F00764852 /* AboutDialog.cpp in Sources */,
+				14367D8E179C529F00764852 /* AboutDialog.h in Sources */,
+				14367D8F179C529F00764852 /* AboutDialog.ui in Sources */,
+				14367D90179C529F00764852 /* BrowserApplication.cpp in Sources */,
+				14367D91179C529F00764852 /* BrowserApplication.h in Sources */,
+				14367D92179C529F00764852 /* BrowserSettings.cpp in Sources */,
+				14367D94179C529F00764852 /* BrowserTab.cpp in Sources */,
+				14367D95179C529F00764852 /* BrowserTab.h in Sources */,
+				14367D96179C529F00764852 /* BrowserWindow.cpp in Sources */,
+				14367D97179C529F00764852 /* BrowserWindow.h in Sources */,
+				14367D98179C529F00764852 /* BrowserWindow.ui in Sources */,
+				14367D99179C529F00764852 /* LogWindow.cpp in Sources */,
+				14367D9A179C529F00764852 /* LogWindow.h in Sources */,
+				14367D9B179C529F00764852 /* LogWindow.ui in Sources */,
+				14367D9C179C529F00764852 /* main.cpp in Sources */,
+				14367D9D179C529F00764852 /* PreferencesDialog.cpp in Sources */,
+				14367D9E179C529F00764852 /* PreferencesDialog.h in Sources */,
+				14367D9F179C529F00764852 /* PreferencesDialog.ui in Sources */,
+				14367DA0179C529F00764852 /* Resources.qrc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		14367C92179C4ABB00764852 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "AXR Core";
+			targetProxy = 14367C91179C4ABB00764852 /* PBXContainerItemProxy */;
+		};
+		149BA728179C7C5200302104 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Qt Helper Library";
+			targetProxy = 149BA727179C7C5200302104 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		14B04E0F179C3EED00AF6FDE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14B04E10179C3EED00AF6FDE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		14B04E15179C3EED00AF6FDE /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14B04E16179C3EED00AF6FDE /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		14B04E32179C3EED00AF6FDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 149BA72F179C8C7C00302104 /* SharedDebug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		14B04E33179C3EED00AF6FDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 149BA730179C8C7C00302104 /* SharedRelease.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		14B04E35179C3EED00AF6FDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14367DA6179C699F00764852 /* AXRBrowser.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		14B04E36179C3EED00AF6FDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14367DA6179C699F00764852 /* AXRBrowser.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14B04DFE179C3EEC00AF6FDE /* Build configuration list for PBXProject "AXR Browser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14B04E32179C3EED00AF6FDE /* Debug */,
+				14B04E33179C3EED00AF6FDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14B04E34179C3EED00AF6FDE /* Build configuration list for PBXNativeTarget "AXR Browser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14B04E35179C3EED00AF6FDE /* Debug */,
+				14B04E36179C3EED00AF6FDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 14B04DFB179C3EEC00AF6FDE /* Project object */;
+}

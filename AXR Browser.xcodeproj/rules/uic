@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+cd "$INPUT_FILE_DIR"
+"$QT_INSTALL_BINS/uic" -o "$DERIVED_SOURCES_DIR/ui_$INPUT_FILE_BASE.h" "$INPUT_FILE_NAME"

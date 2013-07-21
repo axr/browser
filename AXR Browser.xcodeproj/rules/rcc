@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+cd "$INPUT_FILE_DIR"
+"$QT_INSTALL_BINS/rcc" -name "$INPUT_FILE_BASE" -o "$DERIVED_SOURCES_DIR/qrc_$INPUT_FILE_BASE.cpp" "$INPUT_FILE_NAME"
+
+# Silence warning about exit-time destructors
+qrc_file="$DERIVED_SOURCES_DIR/qrc_$INPUT_FILE_BASE.cpp"
+cat "$qrc_file" | pbcopy
+echo "#pragma clang diagnostic ignored \"-Wexit-time-destructors\"" > "$qrc_file"
+echo "#include <QtGlobal>" >> "$qrc_file"
+echo "int QT_MANGLE_NAMESPACE(qInitResources_$INPUT_FILE_BASE)();" >> "$qrc_file"
+echo "int QT_MANGLE_NAMESPACE(qCleanupResources_$INPUT_FILE_BASE)();" >> "$qrc_file"
+pbpaste >> "$qrc_file"

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+    <string>English</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -22,14 +22,14 @@
 			<string>Hierarchical Style Sheet</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>NSExportableTypes</key>
-			<array>
-				<string>org.axrproject.hss</string>
-			</array>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>org.axrproject.hss</string>
-			</array>
+            <key>NSExportableTypes</key>
+            <array>
+                <string>org.axrproject.hss</string>
+            </array>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>org.axrproject.hss</string>
+            </array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -47,19 +47,19 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>${TARGET_NAME_APP_BROWSER_OUTPUT_NAME}</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>${MACOSX_BUNDLE_ICON_FILE}</string>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>org.axrproject.browser</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${TARGET_NAME_APP_BROWSER_OUTPUT_NAME}</string>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>${AXR_VERSION_STRING}</string>
+	<string>${BROWSER_VERSION_STRING}</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -77,7 +77,7 @@
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
+            <string>Viewer</string>
 			<key>CFBundleURLName</key>
 			<string>Local file URL</string>
 			<key>CFBundleURLSchemes</key>
@@ -87,11 +87,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>${BROWSER_VERSION_MAJOR}.${BROWSER_VERSION_MINOR}.${BROWSER_VERSION_PATCH}</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.developer-tools</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>${CMAKE_OSX_DEPLOYMENT_TARGET}</string>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2013 AXR Project. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -105,7 +107,7 @@
 				<string>public.plain-text</string>
 			</array>
 			<key>UTTypeDescription</key>
-            <string>Hierarchical Style Sheet</string>
+			<string>Hierarchical Style Sheet</string>
 			<key>UTTypeIconFile</key>
 			<string>hss.icns</string>
 			<key>UTTypeIdentifier</key>
@@ -114,8 +116,8 @@
 			<string>http://spec.axrproject.org/</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>com.apple.ostype</key>
-				<string>HSS</string>
+                <key>com.apple.ostype</key>
+                <string>HSS</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>hss</string>
