@@ -105,7 +105,7 @@
 				<string>public.plain-text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Hierarchial Style Sheet</string>
+            <string>Hierarchical Style Sheet</string>
 			<key>UTTypeIconFile</key>
 			<string>hss.icns</string>
 			<key>UTTypeIdentifier</key>
