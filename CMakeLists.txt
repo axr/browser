@@ -141,18 +141,20 @@ configure_file("${CMAKE_SOURCE_DIR}/config.in.h" "${CMAKE_BINARY_DIR}/config.h")
 add_subdirectory("${AXR_CORE_SOURCE_DIR_REL}" "${CMAKE_BINARY_DIR}/_core")
 add_subdirectory(src/browser)
 
-if(UNIX)
-    # Perform post-processing on CPack-generated packages
-    add_custom_target(distribution
-        COMMAND cmake --build . --target package && export pkgfilename="${CPACK_PACKAGE_FILE_NAME}" && ${CMAKE_SOURCE_DIR}/cmake/postpackage.sh
-        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-    )
-else()
-    add_custom_target(distribution
-        COMMAND cmake --build . --target package
-        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-    )
-endif()
+if(PANDOC)
+    if(UNIX)
+        # Perform post-processing on CPack-generated packages
+        add_custom_target(distribution
+            COMMAND cmake --build . --target package && export pkgfilename="${CPACK_PACKAGE_FILE_NAME}" && ${CMAKE_SOURCE_DIR}/cmake/postpackage.sh
+            WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+        )
+    else()
+        add_custom_target(distribution
+            COMMAND cmake --build . --target package
+            WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+        )
+    endif()
 
     include(InstallRequiredSystemLibraries)
     include(CPack)
+endif()
