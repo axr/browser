@@ -123,7 +123,7 @@ QMap<QString, AXR::AXRLoggerChannels> BrowserSettings::loggerChannelsMap() const
     while (i.hasNext())
     {
         i.next();
-        map.insert(i.key(), static_cast<AXR::AXRLoggerChannels>(i.value().toULongLong()));
+        map.insert(i.key(), static_cast<AXR::AXRLoggerChannels>(static_cast<int>(i.value().toULongLong())));
     }
 
     return map;
