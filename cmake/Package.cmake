@@ -2,11 +2,11 @@ set(BROWSER_PACKAGE_NAME "AXR Browser")
 set(BROWSER_PACKAGE_PREFIX "axr-browser")
 
 if(WIN32)
-    set(AXR_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\src\\\\core\\\\share\\\\icons\\\\prototype.ico")
+    set(AXR_PACKAGE_ICON "${AXR_CORE_SOURCE_DIR}\\\\share\\\\icons\\\\prototype.ico")
 elseif(APPLE)
-    set(AXR_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/src/core/share/icons/prototype.icns")
+    set(AXR_PACKAGE_ICON "${AXR_CORE_SOURCE_DIR}/share/icons/prototype.icns")
 else()
-    set(AXR_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/src/core/share/icons/prototype.png")
+    set(AXR_PACKAGE_ICON "${AXR_CORE_SOURCE_DIR}/share/icons/prototype.png")
 endif()
 
 # Per-generator overrides
