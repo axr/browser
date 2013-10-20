@@ -68,7 +68,6 @@ class BrowserTabPrivate
 BrowserTab::BrowserTab(QWidget *parent)
 : QAXRWidget(parent), d(new BrowserTabPrivate)
 {
-    setDocument(new AXRDocument);
 }
 
 BrowserTab::~BrowserTab()
@@ -87,7 +86,9 @@ void BrowserTab::navigateToUrl(const QUrl &url)
     // Recreate document
     AXRDocument *currentDocument = document();
     setDocument(0);
-    delete currentDocument;
+    if (currentDocument)
+        delete currentDocument;
+
     setDocument(new AXRDocument);
     document()->setWindowSize(width(), height());
 
