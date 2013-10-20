@@ -326,7 +326,10 @@ void BrowserWindow::updateUIForCurrentTabState()
 
         d->addressBar->setText(tab->currentUrl().toString());
         ui->tabWidget->setVisible(true);
-        ui->enableAntialiasingAction->setChecked(tab->renderer()->isGlobalAntialiasingEnabled());
+        if (tab->document())
+        {
+            ui->enableAntialiasingAction->setChecked(tab->renderer()->isGlobalAntialiasingEnabled());
+        }
     }
     else
     {
