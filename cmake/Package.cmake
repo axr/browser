@@ -89,6 +89,10 @@ endif()
 if(APPLE)
     set(CPACK_GENERATOR "DragNDrop")
     set(CPACK_DMG_VOLUME_NAME "${BROWSER_PACKAGE_NAME} ${BROWSER_VERSION_STRING}")
+    set(CPACK_DMG_BACKGROUND_IMAGE "${CMAKE_BINARY_DIR}/backgroundImage.tiff")
+    set(CPACK_DMG_DS_STORE "${CMAKE_SOURCE_DIR}/cmake/DS_Store")
+
+    execute_process(COMMAND sips -s format tiff -s formatOptions normal "${CMAKE_SOURCE_DIR}/cmake/dmg-background.png" -s dpiWidth 72 -s dpiHeight 72 --out "${CMAKE_BINARY_DIR}/backgroundImage.tiff" WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 endif()
 
 if(NOT WIN32 AND NOT APPLE)
