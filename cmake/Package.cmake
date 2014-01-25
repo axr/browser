@@ -88,7 +88,7 @@ endif()
 
 if(APPLE)
     set(CPACK_GENERATOR "DragNDrop")
-    set(CPACK_DMG_VOLUME_NAME "${BROWSER_PACKAGE_NAME} ${BROWSER_VERSION_STRING}")
+    set(CPACK_DMG_VOLUME_NAME "${BROWSER_PACKAGE_NAME}")
     set(CPACK_DMG_DS_STORE "${CMAKE_SOURCE_DIR}/cmake/DS_Store")
 
     install(FILES "${CMAKE_SOURCE_DIR}/cmake/dmg-background.tiff" DESTINATION .background COMPONENT browser RENAME backgroundImage.tiff)
