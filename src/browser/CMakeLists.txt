@@ -43,7 +43,16 @@ target_link_libraries(${TARGET_NAME_APP_BROWSER} ${TARGET_NAME_LIB_CORE} ${QT_QT
 set(MACOSX_BUNDLE_ICON_FILE prototype.icns)
 
 set_source_files_properties(${axr_icon_SOURCES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-set_source_files_properties(${hss_SOURCES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources/framework)
+
+if(UNIX)
+    set(AXR_SHARE_PREFIX share/axr/)
+endif()
+
+if(APPLE)
+    set_source_files_properties(${hss_SOURCES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources/framework)
+else()
+    install(FILES ${hss_SOURCES} DESTINATION ${AXR_SHARE_PREFIX}resources COMPONENT browser)
+endif()
 
 if(APPLE AND AXR_BUILD_FRAMEWORKS)
     set(TARGET_NAME_APP_BROWSER_OUTPUT_NAME "AXR Browser")
