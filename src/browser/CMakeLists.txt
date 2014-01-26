@@ -51,7 +51,7 @@ endif()
 if(APPLE)
     set_source_files_properties(${hss_SOURCES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources/framework)
 else()
-    install(FILES ${hss_SOURCES} DESTINATION ${AXR_SHARE_PREFIX}resources COMPONENT browser)
+    install(FILES ${hss_SOURCES} DESTINATION ${AXR_SHARE_PREFIX}resources/framework COMPONENT browser)
 endif()
 
 if(APPLE AND AXR_BUILD_FRAMEWORKS)
