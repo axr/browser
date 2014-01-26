@@ -41,10 +41,17 @@
  *
  ********************************************************************/
 
+#include <QtGui>
 #include "BrowserApplication.h"
 
 int main(int argc, char *argv[])
 {
+#if defined(Q_OS_MACX) && QT_VERSION < QT_VERSION_CHECK(4, 8, 6)
+    // QTBUG-32789
+    if (QSysInfo::MacintoshVersion > QSysInfo::MV_10_8)
+        QFont::insertSubstitution(".Lucida Grande UI", "Lucida Grande");
+#endif
+
     BrowserApplication a(argc, argv);
     return a.exec();
 }
