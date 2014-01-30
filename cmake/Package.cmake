@@ -78,7 +78,7 @@ if(WIN32)
     set(CPACK_NSIS_COMPRESSOR "lzma
 BrandingText '${AXR_VENDOR}'")
 
-    set(CPACK_WIX_PRODUCT_GUID "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX") # Change on each release
+    set(CPACK_WIX_PRODUCT_GUID "4DA97AEB-0F41-48CC-9F15-DCBCD2D4A1F1") # Change on each release
     set(CPACK_WIX_UPGRADE_GUID "152C98EF-20E0-429C-B8F0-426876A9C3CF") # Permanent, never change this
 
     set(CPACK_PACKAGE_EXECUTABLES "axrbrowser" "AXR Browser") # Start Menu
