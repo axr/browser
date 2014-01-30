@@ -95,7 +95,7 @@ if(APPLE)
 
     # Starting with OS X 10.9, Rez will need a sysroot in order to find necessary resource files
     if(CMAKE_OSX_SYSROOT)
-        set(CPACK_COMMAND_REZ "${CPACK_COMMAND_REZ} -isysroot \"${CMAKE_OSX_SYSROOT}\"")
+        set(CPACK_COMMAND_REZ "${CPACK_COMMAND_REZ} -isysroot ${CMAKE_OSX_SYSROOT}")
     endif()
 endif()
 
