@@ -92,6 +92,11 @@ if(APPLE)
     set(CPACK_DMG_DS_STORE "${CMAKE_SOURCE_DIR}/cmake/DS_Store")
 
     install(FILES "${CMAKE_SOURCE_DIR}/cmake/dmg-background.tiff" DESTINATION .background COMPONENT browser RENAME backgroundImage.tiff)
+
+    # Starting with OS X 10.9, Rez will need a sysroot in order to find necessary resource files
+    if(CMAKE_OSX_SYSROOT)
+        set(CPACK_COMMAND_REZ "${CPACK_COMMAND_REZ}" -isysroot "${CMAKE_OSX_SYSROOT}")
+    endif()
 endif()
 
 if(NOT WIN32 AND NOT APPLE)
